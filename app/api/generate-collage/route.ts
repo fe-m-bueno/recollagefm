@@ -11,8 +11,8 @@ export const config = {
       sizeLimit: '10mb',
     },
   },
-  runtime: 'edge',
 };
+export const runtime = 'edge';
 
 export async function POST(request: Request) {
   try {
