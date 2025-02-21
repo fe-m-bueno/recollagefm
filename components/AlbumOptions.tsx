@@ -31,7 +31,7 @@ const AlbumOptions: React.FC<AlbumOptionsProps> = ({ album, closeOptions }) => {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 830);
+      setIsMobile(window.innerWidth <= 1150);
     };
 
     handleResize();
@@ -43,14 +43,14 @@ const AlbumOptions: React.FC<AlbumOptionsProps> = ({ album, closeOptions }) => {
 
   return (
     <div className="absolute inset-0 bg-black rounded-xl bg-opacity-50 flex flex-col justify-center items-center z-20">
-      <div className="flex flex-col justify-end dark:backdrop-blur-md backdrop-blur-sm dark:bg-black/35 bg-white/85  rounded-xl p-4 ~w-36/60 ~h-36/60 shadow-lg ~text-[0.5rem]/sm">
+      <div className="flex flex-col justify-end dark:backdrop-blur-md backdrop-blur-sm dark:bg-black/35 bg-white/85  rounded-xl p-4 ~w-28/60 ~h-28/60 shadow-lg ~text-[0.3rem]/sm">
         <h3 className="font-bold mb-2">Options</h3>
         <div className="flex flex-col gap-2 relative">
           <button
             onClick={closeOptions}
-            className="mt-2 px-2 py-1 absolute -top-12 -right-3"
+            className="mt-2 px-2 py-1 absolute -top-10 -right-4"
           >
-            <X />
+            <X className="~w-[0.8rem]/[1rem] ~h-[0.8rem]/[1rem]" />
           </button>
           <CustomCheckbox
             label={t('displayAlbumName')}
@@ -73,23 +73,27 @@ const AlbumOptions: React.FC<AlbumOptionsProps> = ({ album, closeOptions }) => {
                 deleteAlbum(album.id);
                 closeOptions();
               }}
-              className={`mb-2 bg-red-700 hover:bg-red-800 dark:hover:bg-red-600 border border-red-400 ~w-[70%]/[80%] text-white ${
-                isMobile ? 'px-5 py-2' : 'px-2 py-1'
-              } rounded-xl flex flex-row items-center justify-around`}
+              className={`mb-2 bg-red-700 hover:bg-red-800 dark:hover:bg-red-600 border border-red-400 text-white ${
+                isMobile
+                  ? 'px-2 py-2 rounded-full  ~w-8/12'
+                  : 'px-2 py-2 rounded-xl ~w-44/48'
+              }  flex flex-row items-center justify-around`}
             >
               <div className="flex flex-row justify-center items-center gap-2">
-                <Trash size={16} />
+                <Trash className="~w-[0.5rem]/[1rem] ~h-[0.5rem]/[1rem]" />
                 {!isMobile && <span>{t('deleteAlbum')}</span>}
               </div>
             </button>
             <button
               onClick={handlePickSpare}
-              className={`mb-2 bg-blue-700 hover:bg-blue-800 dark:hover:bg-blue-600 border border-blue-400 ~w-[70%]/[80%] text-white ${
-                isMobile ? 'px-5 py-2' : 'px-2 py-1'
-              } rounded-xl flex flex-row items-center justify-around`}
+              className={`mb-2 bg-blue-700 hover:bg-blue-800 dark:hover:bg-blue-600 border border-blue-400  text-white ${
+                isMobile
+                  ? 'px-1 py-2 rounded-full ~w-8/12'
+                  : 'px-2 py-2 rounded-xl ~w-44/48'
+              } flex flex-row items-center justify-around`}
             >
               <div className="flex flex-row justify-center items-center gap-2">
-                <Replace size={16} />
+                <Replace className="~w-[0.5rem]/[1rem] ~h-[0.5rem]/[1rem]" />
                 {!isMobile && <span>{t('chooseBackup')}</span>}
               </div>
             </button>
