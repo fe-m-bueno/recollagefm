@@ -2,7 +2,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { CollageContext } from '../context/CollageContext';
-import { Play } from 'lucide-react';
+import { Loader, Play } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 const GenerateCollage: React.FC = () => {
@@ -85,7 +85,13 @@ const GenerateCollage: React.FC = () => {
       >
         <span className="drop-shadow-md ~text-[0.5rem]/base">
           {isGenerating ? (
-            <span>{t('creating')}</span>
+            isMobile ? (
+              <span>
+                <Loader size={18} />
+              </span>
+            ) : (
+              <span>{t('creating')}</span>
+            )
           ) : isMobile ? (
             <span>
               <Play size={18} />

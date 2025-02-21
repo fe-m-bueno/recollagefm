@@ -21,7 +21,7 @@ const ResultsPage: React.FC = () => {
 
   return (
     <div className="h-screen flex flex-col items-center justify-center bg-slate-950">
-      <img src={collageUrl} alt="Generated Collage" className="h-full" />
+      <img src={collageUrl} alt="Generated Collage" className="h-100%" />
     </div>
   );
 };
