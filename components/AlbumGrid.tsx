@@ -99,19 +99,21 @@ const AlbumGrid = () => {
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
       >
-        <SortableContext
-          items={albums.map((a: any) => a.id)}
-          strategy={rectSortingStrategy}
-        >
-          <div
-            className={`grid ~gap-2/4 w-full h-full`}
-            style={{ gridTemplateColumns: `repeat(${computedColumns}, 1fr)` }}
+        <div style={{ touchAction: 'none' }}>
+          <SortableContext
+            items={albums.map((a: any) => a.id)}
+            strategy={rectSortingStrategy}
           >
-            {albums.map((album: any, index: number) => (
-              <AlbumCard key={album.id} album={album} index={index} />
-            ))}
-          </div>
-        </SortableContext>
+            <div
+              className={`grid ~gap-2/4 w-full h-full`}
+              style={{ gridTemplateColumns: `repeat(${computedColumns}, 1fr)` }}
+            >
+              {albums.map((album: any, index: number) => (
+                <AlbumCard key={album.id} album={album} index={index} />
+              ))}
+            </div>
+          </SortableContext>
+        </div>
         <section id="spare" className="mt-4 flex flex-col items-center">
           {replacementTarget ? (
             <button
