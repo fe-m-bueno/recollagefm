@@ -81,7 +81,7 @@ function drawTextWithFallback(
       y += lineHeight;
     }
 
-    ctx.strokeText(char, offsetX, y);
+    ctx.strokeText(char, offsetX, y + 0.9);
     ctx.fillText(char, offsetX, y);
 
     ctx.shadowColor = 'transparent';
