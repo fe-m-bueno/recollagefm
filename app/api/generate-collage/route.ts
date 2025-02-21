@@ -1,5 +1,9 @@
 import { NextResponse } from 'next/server';
-import { createCanvas, loadImage } from 'canvas';
+import { createCanvas, loadImage, registerFont } from 'canvas';
+import path from 'path';
+
+const fontPath = path.resolve('./public/fonts/Inter.ttf');
+registerFont(fontPath, { family: 'Inter' });
 
 export async function POST(request: Request) {
   try {
