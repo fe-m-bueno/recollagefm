@@ -5,8 +5,6 @@ import path from 'path';
 const fontPath = path.resolve('./public/fonts/Inter.ttf');
 registerFont(fontPath, { family: 'Inter' });
 
-export const runtime = 'edge';
-
 export async function POST(request: Request) {
   try {
     const { gridSize, albums } = await request.json();
@@ -24,7 +22,7 @@ export async function POST(request: Request) {
       canvasSize = 1500;
     } else if (gridSize === '10x10') {
       dimension = 10;
-      canvasSize = 2500;
+      canvasSize = 3000;
     }
 
     const cellSize = Math.floor(canvasSize / dimension);
@@ -87,9 +85,13 @@ export async function POST(request: Request) {
       ctx.shadowColor = 'transparent';
     }
 
-    const buffer = canvas.toBuffer('image/png');
+    const isLargeGrid = dimension === 10;
+
+    const buffer = isLargeGrid
+      ? canvas.toBuffer('image/jpeg', { quality: 1 })
+      : canvas.toBuffer('image/png');
     return new NextResponse(buffer, {
-      headers: { 'Content-Type': 'image/png' },
+      headers: { 'Content-Type': isLargeGrid ? 'image/jpeg' : 'image/png' },
     });
   } catch (error) {
     console.error(error);

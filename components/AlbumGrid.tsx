@@ -78,11 +78,6 @@ const AlbumGrid = () => {
       updateAlbums(newAlbums);
     }
   };
-  const handleReplacement = (album) => {
-    if (replacementTarget) {
-      swapAlbumWithSpare(album.id);
-    }
-  };
 
   return (
     <div>

@@ -56,7 +56,7 @@ const CustomSelect = <T extends string | number>({
               className="cursor-pointer select-none px-4 py-2 data-[focus]:bg-blue-600 data-[focus]:text-white"
             >
               {({ selected }) => (
-                <div className="flex items-center justify-between ~text-[0.5rem]/sm">
+                <div className="flex items-center justify-between ~text-[0.5rem]/[0.7rem]">
                   {option.label}
                   {selected && (
                     <Check className="pl-1 ~h-3/4 ~w-2/3 text-white" />
