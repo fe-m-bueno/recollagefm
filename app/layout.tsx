@@ -53,7 +53,7 @@ export default function RootLayout({
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" type="image/png" href="/favicon.png" />
         <link rel="apple-touch-icon" href="/favicon.png" />
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#020617" />
       </head>
       <body aria-live="polite">
         <I18nProvider>

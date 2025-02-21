@@ -54,9 +54,9 @@ export default function AlbumsPage() {
   return (
     <div className="min-h-screen py-4 overflow-x-clip">
       <div className="w-screen flex justify-center">
-        <div className="w-full ~px-1/16 flex flex-row items-center justify-between">
+        <div className="w-full ~px-1/16 flex flex-row items-center justify-between ~gap-[0.2rem]/1">
           <Link href={'/'} className="mb-4">
-            <Logo className="mt-4 ~w-8/20 h-auto dark:text-white/90 text-blue-600 fill-current pb-4" />
+            <Logo className="mt-4 ~w-5/20 h-auto dark:text-white/90 text-blue-600 fill-current pb-4" />
           </Link>
           <div className="flex flex-row items-center justify-between ~gap-1/6">
             <UndoRedo />

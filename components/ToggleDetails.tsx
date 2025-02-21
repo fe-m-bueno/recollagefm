@@ -88,18 +88,18 @@ const ToggleDetails = () => {
       >
         {albumNamesShown ? (
           <span className="~text-[0.5rem]/sm flex flex-row justify-center items-center gap-2">
-            <Eye size={isMobile ? 18 : 24} />{' '}
+            <Eye size={isMobile ? 14 : 24} />{' '}
             {isMobile ? (
-              <Disc3 size={isMobile ? 18 : 24} />
+              <Disc3 size={isMobile ? 14 : 24} />
             ) : (
               <span>{t('hideAlbum')}</span>
             )}
           </span>
         ) : (
           <span className="~text-[0.5rem]/sm flex flex-row justify-center items-center gap-2">
-            <EyeClosed size={isMobile ? 18 : 24} />
+            <EyeClosed size={isMobile ? 14 : 24} />
             {isMobile ? (
-              <Disc3 size={isMobile ? 18 : 24} />
+              <Disc3 size={isMobile ? 14 : 24} />
             ) : (
               <span>{t('showAlbum')}</span>
             )}
@@ -112,18 +112,18 @@ const ToggleDetails = () => {
       >
         {artistNamesShown ? (
           <span className="~text-[0.5rem]/sm flex flex-row justify-center items-center gap-2">
-            <Eye size={isMobile ? 18 : 24} />
+            <Eye size={isMobile ? 14 : 24} />
             {isMobile ? (
-              <VenetianMask size={isMobile ? 18 : 24} />
+              <VenetianMask size={isMobile ? 14 : 24} />
             ) : (
               <span>{t('hideArtist')}</span>
             )}
           </span>
         ) : (
           <span className="~text-[0.5rem]/sm flex flex-row justify-center items-center gap-2">
-            <EyeClosed size={isMobile ? 18 : 24} />
+            <EyeClosed size={isMobile ? 14 : 24} />
             {isMobile ? (
-              <VenetianMask size={isMobile ? 18 : 24} />
+              <VenetianMask size={isMobile ? 14 : 24} />
             ) : (
               <span>{t('showArtist')}</span>
             )}
@@ -136,18 +136,18 @@ const ToggleDetails = () => {
       >
         {playcountsShown ? (
           <span className="~text-[0.5rem]/sm flex flex-row justify-center items-center gap-2">
-            <Eye size={isMobile ? 18 : 24} />
+            <Eye size={isMobile ? 14 : 24} />
             {isMobile ? (
-              <BookHeadphones size={isMobile ? 18 : 24} />
+              <BookHeadphones size={isMobile ? 14 : 24} />
             ) : (
               <span>{t('hidePlaycount')}</span>
             )}
           </span>
         ) : (
           <span className="~text-[0.5rem]/sm flex flex-row justify-center items-center gap-2">
-            <EyeClosed size={isMobile ? 18 : 24} />
+            <EyeClosed size={isMobile ? 14 : 24} />
             {isMobile ? (
-              <BookHeadphones size={isMobile ? 18 : 24} />
+              <BookHeadphones size={isMobile ? 14 : 24} />
             ) : (
               <span>{t('showPlaycount')}</span>
             )}
