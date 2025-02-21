@@ -6,8 +6,14 @@
 * {
   box-sizing: border-box;
 }
+
 body {
-  @apply dark:bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] dark:from-black/85 dark:via-black/95 dark:to-slate-950 dark:text-white bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-gray-200/50 via-white/60 to-[#f2f2f2] text-black;
+  @apply dark:bg-slate-950 bg-[#f2f2f2];
+  @apply dark:text-white text-black;
+  @apply dark:bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))]
+         dark:from-[#333333] dark:via-[#0c0d11] dark:to-[#020617]
+         bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))]
+         from-[#ebebeb] to-[#f2f2f2];
 }
 
 @layer base {

@@ -5,6 +5,15 @@ import path from 'path';
 const fontPath = path.resolve('./public/fonts/Inter.ttf');
 registerFont(fontPath, { family: 'Inter' });
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '10mb',
+    },
+  },
+  runtime: 'edge',
+};
+
 export async function POST(request: Request) {
   try {
     const { gridSize, albums } = await request.json();

@@ -80,21 +80,21 @@ const GenerateCollage: React.FC = () => {
       )}
       <button
         onClick={handleGenerate}
-        className="text-white px-4 py-2 transition duration-300 ease-out bg-green-600 drop-shadow-sm hover:drop-shadow-md hover:shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.8)] hover:bg-fuchsia-600 border-1 border-green-400 hover:border-fuchsia-500 rounded-full mb-4 text-nowrap"
+        className="text-white ~px-2/4 py-2 mr-1 transition duration-300 ease-out bg-green-600 drop-shadow-sm hover:drop-shadow-md hover:shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.8)] hover:bg-fuchsia-600 border-1 border-green-400 hover:border-fuchsia-500 rounded-full mb-4 text-nowrap"
         disabled={isGenerating || albums.length === 0}
       >
         <span className="drop-shadow-md ~text-[0.5rem]/base">
           {isGenerating ? (
             isMobile ? (
               <span>
-                <Loader size={18} />
+                <Loader className="~w-3/4 ~h-3/4" />
               </span>
             ) : (
               <span>{t('creating')}</span>
             )
           ) : isMobile ? (
             <span>
-              <Play size={18} />
+              <Play className="~w-3/4 ~h-3/4" />
             </span>
           ) : (
             <span>{t('create')}</span>

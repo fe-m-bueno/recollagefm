@@ -79,9 +79,9 @@ const UserInput = () => {
   ];
 
   return (
-    <form onSubmit={handleSubmit} className="p-6 ~w-[20rem]/[48rem]">
+    <form onSubmit={handleSubmit} className="p-6 ~w-[20rem]/[44rem]">
       <div className="flex flex-wrap gap-4 mb-4">
-        <div className="flex-1 min-w-[9rem] ~text-[0.7rem]/base">
+        <div className="flex-1 min-w-[7rem] ~text-[0.7rem]/md">
           <label className="block mb-2 pl-3">{t('username')}</label>
           <input
             type="text"
@@ -132,7 +132,7 @@ const UserInput = () => {
       <div className="flex flex-row items-center justify-center ~text-sm/base">
         <button
           type="submit"
-          className={`w-[33%] transition bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))]  from-blue-600/95 to-blue-600 dark:hover:bg-white/10 dark:bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))]  backdrop-blur-sm dark:from-white/10 dark:to-white/5 text-white py-4 rounded-full mt-10 border dark:border-white/50 border-blue-700 hover:bg-blue-700 font-bold shadow-md`}
+          className={`~w-[25%]/[33%] transition bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))]  from-blue-600/95 to-blue-600 dark:hover:bg-white/10 dark:bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))]  backdrop-blur-sm dark:from-white/10 dark:to-white/5 text-white py-4 px-3 rounded-full mt-10 border dark:border-white/50 border-blue-700 hover:bg-blue-700 font-bold shadow-md`}
           disabled={loading}
         >
           {loading ? t('loading') : t('submit')}

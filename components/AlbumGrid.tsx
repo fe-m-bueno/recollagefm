@@ -96,7 +96,7 @@ const AlbumGrid = () => {
           strategy={rectSortingStrategy}
         >
           <div
-            className={`grid gap-4 w-full h-full`}
+            className={`grid ~gap-2/4 w-full h-full`}
             style={{ gridTemplateColumns: `repeat(${computedColumns}, 1fr)` }}
           >
             {albums.map((album: any, index: number) => (
