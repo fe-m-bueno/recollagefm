@@ -129,7 +129,7 @@ export async function POST(request: Request) {
         const img = await loadImage(album.imageUrl);
         ctx.drawImage(img, x, y, cellSize, cellSize);
       } catch (error) {
-        ctx.fillStyle = '#020617';
+        ctx.fillStyle = '#ffffff';
         ctx.fillRect(x, y, cellSize, cellSize);
       }
 
@@ -162,7 +162,7 @@ export async function POST(request: Request) {
     console.log(ctx.font);
 
     const buffer = isLargeGrid
-      ? canvas.toBuffer('image/jpeg', { quality: 1 })
+      ? canvas.toBuffer('image/jpeg', { quality: 0.8 })
       : canvas.toBuffer('image/png');
     return new NextResponse(buffer, {
       headers: { 'Content-Type': isLargeGrid ? 'image/jpeg' : 'image/png' },
