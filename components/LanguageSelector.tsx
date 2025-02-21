@@ -1,14 +1,11 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import CustomSelect from './CustomSelect';
 
 const LanguageSelector: React.FC = () => {
   const { i18n } = useTranslation();
-
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    i18n.changeLanguage(event.target.value);
-  };
+  const [selectedLanguage, setSelectedLanguage] = useState<string>('en'); // Fallback padrão
 
   const languageOptions = [
     { value: 'en', label: 'English' },
@@ -16,10 +13,24 @@ const LanguageSelector: React.FC = () => {
     { value: 'es', label: 'Español' },
   ];
 
+  useEffect(() => {
+    const detectedLang = i18n.language.toLowerCase();
+
+    const matchedLang =
+      languageOptions.find((opt) => detectedLang.startsWith(opt.value))
+        ?.value || 'en';
+    setSelectedLanguage(matchedLang);
+  }, [i18n.language]);
+
+  const handleChange = (value: string) => {
+    setSelectedLanguage(value);
+    i18n.changeLanguage(value);
+  };
+
   return (
     <CustomSelect
-      value={i18n.language}
-      onChange={(value) => i18n.changeLanguage(value)}
+      value={selectedLanguage}
+      onChange={handleChange}
       options={languageOptions}
       menuPlacement="bottom"
     />
