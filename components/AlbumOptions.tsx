@@ -14,11 +14,19 @@ const AlbumOptions: React.FC<AlbumOptionsProps> = ({ album, closeOptions }) => {
   const { toggleAlbumOption, deleteAlbum, setReplacementTarget } =
     useContext(CollageContext);
   const { t } = useTranslation();
+  const { setPreviousScroll } = useContext(CollageContext);
 
   const handlePickSpare = () => {
     setReplacementTarget(album.id);
+    setPreviousScroll(window.scrollY);
+    const spareSection = document.getElementById('spare');
+    if (spareSection) {
+      spareSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
     closeOptions();
   };
+
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {

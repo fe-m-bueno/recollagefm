@@ -22,7 +22,7 @@ export async function POST(request: Request) {
       canvasSize = 1500;
     } else if (gridSize === '10x10') {
       dimension = 10;
-      canvasSize = 3000;
+      canvasSize = 2100;
     }
 
     const cellSize = Math.floor(canvasSize / dimension);

@@ -29,6 +29,8 @@ interface CollageContextProps {
   replacementTarget: string | null;
   setReplacementTarget: (albumId: string | null) => void;
   swapAlbumWithSpare: (spareAlbumId: string) => void;
+  previousScroll: number | null;
+  setPreviousScroll: (value: number | null) => void;
 }
 
 export const CollageContext = createContext<CollageContextProps>(
@@ -66,6 +68,7 @@ export const CollageProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, [state]);
 
+  const [previousScroll, setPreviousScroll] = useState<number | null>(null);
   const [history, setHistory] = useState<[any[], any[]][]>([]);
   const [future, setFuture] = useState<[any[], any[]][]>([]);
 
@@ -172,30 +175,24 @@ export const CollageProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 
   const swapAlbumWithSpare = (spareAlbumId: string) => {
-    setState((prevState) => {
-      if (!replacementTarget) return prevState;
-      pushSnapshot(prevState.albums, prevState.spareAlbums);
-      setFuture([]);
-      const mainIndex = prevState.albums.findIndex(
-        (album) => album.id === replacementTarget
-      );
-      if (mainIndex === -1) return prevState;
-      const spareIndex = prevState.spareAlbums.findIndex(
-        (album) => album.id === spareAlbumId
-      );
-      if (spareIndex === -1) return prevState;
-      const newMainAlbums = [...prevState.albums];
-      const mainAlbum = newMainAlbums[mainIndex];
-      const spareAlbum = prevState.spareAlbums[spareIndex];
-      newMainAlbums[mainIndex] = spareAlbum;
-      const newSpareAlbums = [...prevState.spareAlbums];
-      newSpareAlbums[spareIndex] = mainAlbum;
-      return {
-        ...prevState,
-        albums: newMainAlbums,
-        spareAlbums: newSpareAlbums,
-      };
-    });
+    if (!replacementTarget) return;
+    const mainIndex = state.albums.findIndex(
+      (album) => album.id === replacementTarget
+    );
+    if (mainIndex === -1) return;
+    const spareIndex = state.spareAlbums.findIndex(
+      (album) => album.id === spareAlbumId
+    );
+    if (spareIndex === -1) return;
+
+    const mainAlbum = state.albums[mainIndex];
+    const spareAlbum = state.spareAlbums[spareIndex];
+    const newMainAlbums = [...state.albums];
+    newMainAlbums[mainIndex] = spareAlbum;
+    const newSpareAlbums = [...state.spareAlbums];
+    newSpareAlbums[spareIndex] = mainAlbum;
+
+    updateState(newMainAlbums, newSpareAlbums);
     setReplacementTarget(null);
   };
 
@@ -210,12 +207,12 @@ export const CollageProvider: React.FC<{ children: React.ReactNode }> = ({
         toggleAlbumOption,
         deleteAlbum,
         undo,
-
         canUndo,
-
         replacementTarget,
         setReplacementTarget,
         swapAlbumWithSpare,
+        previousScroll,
+        setPreviousScroll,
       }}
     >
       {children}

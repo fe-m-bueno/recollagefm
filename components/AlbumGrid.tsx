@@ -26,6 +26,8 @@ const AlbumGrid = () => {
     swapAlbumWithSpare,
     replacementTarget,
     setReplacementTarget,
+    previousScroll,
+    setPreviousScroll,
   } = useContext(CollageContext);
   const { albums, settings, spareAlbums } = state;
   const { t } = useTranslation();
@@ -48,12 +50,14 @@ const AlbumGrid = () => {
         newColumns = width < 800 ? 2 : 4;
       } else if (settings.gridSize === '10x10') {
         if (width < 730) {
-          newColumns = 4;
-        } else if (width < 800) {
+          newColumns = 3;
+        } else if (width < 1200) {
           newColumns = 5;
         } else {
           newColumns = 10;
         }
+      } else if (settings.gridSize === '5x5') {
+        newColumns = width < 1000 ? 2 : 5;
       } else {
         newColumns = defaultColumns;
       }
@@ -79,6 +83,15 @@ const AlbumGrid = () => {
     }
   };
 
+  const handleCancelReplacement = () => {
+    setReplacementTarget(null);
+
+    if (previousScroll !== null) {
+      window.scrollTo({ top: previousScroll, behavior: 'smooth' });
+      setPreviousScroll(null);
+    }
+  };
+
   return (
     <div>
       <DndContext
@@ -99,10 +112,10 @@ const AlbumGrid = () => {
             ))}
           </div>
         </SortableContext>
-        <section id="#spare" className="mt-4 flex flex-col items-center">
+        <section id="spare" className="mt-4 flex flex-col items-center">
           {replacementTarget ? (
             <button
-              onClick={() => setReplacementTarget(null)}
+              onClick={handleCancelReplacement}
               className="mb-3 mt-2 px-4 py-2 bg-red-700 text-white rounded"
             >
               {t('cancelReplacement')}
@@ -125,12 +138,26 @@ const AlbumGrid = () => {
                 onClick={() => {
                   if (replacementTarget) {
                     swapAlbumWithSpare(album.id);
+                    if (previousScroll !== null) {
+                      window.scrollTo({
+                        top: previousScroll,
+                        behavior: 'smooth',
+                      });
+                      setPreviousScroll(null);
+                    }
                   }
                 }}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     if (replacementTarget) {
                       swapAlbumWithSpare(album.id);
+                      if (previousScroll !== null) {
+                        window.scrollTo({
+                          top: previousScroll,
+                          behavior: 'smooth',
+                        });
+                        setPreviousScroll(null);
+                      }
                     }
                   }
                 }}

@@ -36,7 +36,7 @@ const AlbumCard: React.FC<AlbumCardProps> = ({ album, index }) => {
       ref={setNodeRef}
       style={style}
       title={`${album.name} - ${album.artist}`}
-      className={`rounded relative w-fit h-fit min-w-28 min-h-28 ${
+      className={`rounded relative w-fit h-fit min-w-24 min-h-24 ${
         replacementTarget === album.id
           ? 'animate-pulse ring ring-blue-400 transform scale-105 transition-transform duration-300 rounded-xl'
           : ''
@@ -73,17 +73,17 @@ const AlbumCard: React.FC<AlbumCardProps> = ({ album, index }) => {
           />
           <div className="absolute top-2 left-0 w-full pl-2">
             {album.displayAlbumName && (
-              <h3 className="mt-1 ~text-[0.5rem]/xs font-bold text-white text-shadow-lg">
+              <h3 className="mt-1 ~text-[0.4rem]/xs font-bold text-white text-shadow-lg">
                 {album.name}
               </h3>
             )}
             {album.displayArtistName && (
-              <p className="~text-[0.5rem]/xs text-white/90 text-shadow-md">
+              <p className="~text-[0.3rem]/xs text-white/90 text-shadow-md">
                 {album.artist}
               </p>
             )}
             {album.displayPlaycount && (
-              <p className="~text-[0.5rem]/xs  text-white/80 text-shadow-md">
+              <p className="~text-[0.3rem]/xs  text-white/80 text-shadow-md">
                 Plays: {album.playcount}
               </p>
             )}

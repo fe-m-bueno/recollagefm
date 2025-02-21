@@ -32,10 +32,10 @@ const CustomSelect = <T extends string | number>({
   const { t } = useTranslation();
 
   return (
-    <div className="relative w-full ~text-[0.7rem]/md text-nowrap">
+    <div className="relative w-full ~text-base/md text-nowrap">
       {labelKey && <label className="block mb-2 pl-3">{t(labelKey)}</label>}
       <Listbox value={value} onChange={onChange}>
-        <ListboxButton className="w-full flex justify-between items-center dark:bg-black/25 bg-white/80 backdrop-blur-sm border dark:border-white/10 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-white/50 ~text-[0.5rem]/[1rem]">
+        <ListboxButton className="w-full flex justify-between items-center dark:bg-black/25 bg-white/80 backdrop-blur-sm border dark:border-white/10 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-white/50 ~text-xs/base">
           {options.find((o) => o.value === value)?.label}
           <ChevronDown className="pl-1 h-4 w-4 text-gray-400" />
         </ListboxButton>
@@ -56,7 +56,7 @@ const CustomSelect = <T extends string | number>({
               className="cursor-pointer select-none px-4 py-2 data-[focus]:bg-blue-600 data-[focus]:text-white"
             >
               {({ selected }) => (
-                <div className="flex items-center justify-between ~text-[0.5rem]/[0.7rem]">
+                <div className="flex items-center justify-between ~text-xs/base">
                   {option.label}
                   {selected && (
                     <Check className="pl-1 ~h-3/4 ~w-2/3 text-white" />

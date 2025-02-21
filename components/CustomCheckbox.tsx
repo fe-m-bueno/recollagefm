@@ -21,7 +21,10 @@ const CustomCheckbox: React.FC<CustomCheckboxProps> = ({
         className="hidden peer"
       />
 
-      <div className="~w-2/5 ~h-2/5 flex items-center justify-center rounded border border-white/30 bg-black/20  peer-checked:bg-blue-600 peer-checked:border-blue-600 dark:peer-checked:bg-white dark:peer-checked:border-white peertransition-all duration-200">
+      <div
+        className="~w-2/5 ~h-2/5 flex items-center justify-center rounded border border-white/30 bg-black/20  peer-checked:bg-blue-600 peer-checked:border-blue-600 dark:peer-checked:bg-white dark:peer-checked:border-white peertransition-all duration-200"
+        tabIndex={0}
+      >
         {checked && (
           <svg
             className="~w-3/4 ~h-3/4 dark:text-black text-white"
