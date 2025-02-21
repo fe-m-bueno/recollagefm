@@ -1,0 +1,53 @@
+{
+  "title": "Creador de Collages Last.fm",
+  "username": "Nombre de usuario",
+  "usernamePlaceholder": "Tu nombre de usuario en Last.fm",
+  "gridSizeLabel": "Tamaño",
+  "gridSize": {
+    "3x3": "3x3",
+    "4x4": "4x4",
+    "5x5": "5x5",
+    "10x10": "10x10"
+  },
+  "timespanLabel": "Período",
+  "timespan": {
+    "7day": "7 días",
+    "1month": "1 mes",
+    "3month": "3 meses",
+    "6month": "6 meses",
+    "12month": "12 meses",
+    "overall": "Siempre"
+  },
+  "displayArtistNames": "Mostrar nombre de artistas",
+  "displayArtistName": "Mostrar artista",
+  "displayAlbumNames": "Mostrar nombre de álbumes",
+  "displayAlbumName": "Mostrar álbum",
+  "displayPlaycount": "Mostrar reproducciones",
+  "submit": "Obtener álbumes",
+  "loading": "Cargando...",
+  "startNow": "Comienza ahora",
+  "features": {
+    "gatekeep": "Protege tus Joyas Ocultas",
+    "gatekeepContent": "Oculta ciertos álbumes de tu mosaico para mantener tu gusto musical en misterio.",
+    "gatekeepSub": "Oculta Tus Guilty Pleasures",
+    "spare": "¿No lo oíste suficiente?",
+    "spareSub": "Álbumes de respaldo a disposición",
+    "spareContent": "Cámbialo fácilmente por otro álbum de tu lista de más reproducidos.",
+    "move": "Mueve los álbumes libremente",
+    "moveSub": "Sin cuadrículas fijas",
+    "moveContent": "Reordena manualmente tu mosaico – destaca tus favoritos como quieras."
+  },
+  "language": "Idioma",
+  "hideAlbum": "Ocultar álbum",
+  "showAlbum": "Mostrar álbum",
+  "hideArtist": "Ocultar artista",
+  "showArtist": "Mostrar artista",
+  "hidePlaycount": "Ocultar playcount",
+  "showPlaycount": "Mostrar playcount",
+  "creating": "Creando...",
+  "create": "Crear mosaico",
+  "deleteAlbum": "Borrar álbum",
+  "backupAlbums": "Álbumes de respaldo",
+  "chooseBackup": "Elegir un respaldo",
+  "cancelReplacement": "Cancelar reemplazo"
+}

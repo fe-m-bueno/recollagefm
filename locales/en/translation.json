@@ -1,0 +1,53 @@
+{
+  "title": "Last.fm Collage Maker",
+  "username": "Username",
+  "usernamePlaceholder": "Your Last.fm username",
+  "gridSizeLabel": "Grid Size",
+  "gridSize": {
+    "3x3": "3x3",
+    "4x4": "4x4",
+    "5x5": "5x5",
+    "10x10": "10x10"
+  },
+  "timespanLabel": "Time Span",
+  "timespan": {
+    "7day": "7 Days",
+    "1month": "1 Month",
+    "3month": "3 Months",
+    "6month": "6 Months",
+    "12month": "12 Months",
+    "overall": "Overall"
+  },
+  "displayArtistNames": "Display Artist Names",
+  "displayArtistName": "Display Artist Name",
+  "displayAlbumNames": "Display Album Names",
+  "displayAlbumName": "Display Album Name",
+  "displayPlaycount": "Display Playcount",
+  "submit": "Search Albums",
+  "loading": "Loading...",
+  "startNow": "Start Now",
+  "features": {
+    "gatekeep": "Gatekeep your Hidden Gems",
+    "gatekeepContent": "Hide albums from your collage to keep your music taste mysterious.",
+    "gatekeepSub": "Keep your guilty pleasures a secret",
+    "spare": "Didn't listen enough?",
+    "spareSub": "Your backup albums got you covered",
+    "spareContent": "Easily swap it for another album from your most played list.",
+    "move": "Move Albums Freely",
+    "moveSub": "No More Fixed Grids",
+    "moveContent": "Manually reorder your collage – highlight your favorites however you want."
+  },
+  "language": "Language",
+  "hideAlbum": "Hide Album",
+  "showAlbum": "Show Album",
+  "hideArtist": "Hide Artist",
+  "showArtist": "Show Artist",
+  "hidePlaycount": "Hide Playcount",
+  "showPlaycount": "Show Playcount",
+  "creating": "Creating...",
+  "create": "Create Collage",
+  "deleteAlbum": "Delete Album",
+  "backupAlbums": "Backup Albums",
+  "chooseBackup": "Choose a Backup",
+  "cancelReplacement": "Cancel Replacement"
+}

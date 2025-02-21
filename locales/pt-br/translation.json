@@ -1,0 +1,53 @@
+{
+  "title": "Criador de Colagens Last.fm",
+  "username": "Nome de Usuário",
+  "usernamePlaceholder": "Seu nome de usuário do Last.fm",
+  "gridSizeLabel": "Tamanho",
+  "gridSize": {
+    "3x3": "3x3",
+    "4x4": "4x4",
+    "5x5": "5x5",
+    "10x10": "10x10"
+  },
+  "timespanLabel": "Período",
+  "timespan": {
+    "7day": "7 Dias",
+    "1month": "1 Mês",
+    "3month": "3 Meses",
+    "6month": "6 Meses",
+    "12month": "12 Meses",
+    "overall": "Sempre"
+  },
+  "displayArtistNames": "Exibir Nomes dos Artistas",
+  "displayArtistName": "Exibir Nomes do Artista",
+  "displayAlbumNames": "Exibir Nomes dos Álbuns",
+  "displayAlbumName": "Exibir Nomes do Álbum",
+  "displayPlaycount": "Exibir Contagem de Plays",
+  "submit": "Buscar Álbuns",
+  "loading": "Carregando...",
+  "startNow": "Comece Agora",
+  "features": {
+    "gatekeep": "Guarde seus Tesouros Ocultos",
+    "gatekeepContent": "Oculte álbuns da sua semaninha para manter seu gosto musical misterioso.",
+    "gatekeepSub": "Esconda seus guilty pleasures",
+    "spare": "Não escutou o suficiente?",
+    "spareSub": "Álbuns de backup à sua disposição",
+    "spareContent": "Troque facilmente por outro álbum da sua lista de mais ouvidos.",
+    "move": "Mova os seus álbuns livremente",
+    "moveSub": "Chega de grades fixas",
+    "moveContent": "Reordene seua semaninha manualmente – destaque seus favoritos como quiser."
+  },
+  "language": "Idioma",
+  "hideAlbum": "Esconder Álbum",
+  "showAlbum": "Mostrar Álbum",
+  "hideArtist": "Esconder Artist",
+  "showArtist": "Mostrar Artist",
+  "hidePlaycount": "Esconder Playcount",
+  "showPlaycount": "Mostrar Playcount",
+  "creating": "Criando...",
+  "create": "Criar Mosaico",
+  "deleteAlbum": "Excluir Álbum",
+  "backupAlbums": "Álbuns de Backup",
+  "chooseBackup": "Escolha um Backup",
+  "cancelReplacement": "Cancelar substituição"
+}
