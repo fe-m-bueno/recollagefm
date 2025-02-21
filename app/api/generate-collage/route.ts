@@ -46,7 +46,7 @@ export async function POST(request: Request) {
 
       const fontSize = Math.floor(cellSize / 20);
       const lineHeight = fontSize + 4;
-      ctx.font = `${fontSize}px Tahoma`;
+      ctx.font = `${fontSize}px "Noto Sans"`;
       ctx.textBaseline = 'top';
       ctx.shadowColor = 'black';
       ctx.shadowOffsetX = 1;
