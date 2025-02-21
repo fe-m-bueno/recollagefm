@@ -10,6 +10,7 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
+  TouchSensor,
 } from '@dnd-kit/core';
 import {
   arrayMove,
@@ -29,19 +30,21 @@ export default function AlbumsPage() {
   const { t } = useTranslation();
 
   const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 10 } })
+    useSensor(PointerSensor, { activationConstraint: { distance: 10 } }),
+    useSensor(TouchSensor, {
+      activationConstraint: { delay: 150, tolerance: 5 },
+    })
   );
 
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
+    if (!over || active.id === over.id) return;
 
-    if (active.id !== over.id) {
-      const oldIndex = albums.findIndex((a: any) => a.id === active.id);
-      const newIndex = albums.findIndex((a: any) => a.id === over.id);
-      if (oldIndex !== -1 && newIndex !== -1) {
-        const newAlbums = arrayMove(albums, oldIndex, newIndex);
-        updateAlbums(newAlbums);
-      }
+    const oldIndex = albums.findIndex((a: any) => a.id === active.id);
+    const newIndex = albums.findIndex((a: any) => a.id === over.id);
+    if (oldIndex !== -1 && newIndex !== -1) {
+      const newAlbums = arrayMove(albums, oldIndex, newIndex);
+      updateAlbums(newAlbums);
     }
   };
 
