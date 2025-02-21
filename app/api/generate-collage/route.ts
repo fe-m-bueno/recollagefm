@@ -54,7 +54,7 @@ export async function POST(request: Request) {
 
       const fontSize = Math.floor(cellSize / 20);
       const lineHeight = fontSize + 4;
-      ctx.font = `${fontSize}px "Inter", sans-serif`;
+      ctx.font = `${fontSize}px system-ui`;
       ctx.textBaseline = 'top';
       ctx.shadowColor = 'black';
       ctx.shadowOffsetX = 1;
