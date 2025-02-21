@@ -1,5 +1,94 @@
 import { NextResponse } from 'next/server';
-import { createCanvas, loadImage } from 'canvas';
+import { createCanvas, loadImage, registerFont } from 'canvas';
+import path from 'path';
+
+registerFont(path.join(process.cwd(), './public/fonts/NotoSans.ttf'), {
+  family: 'NotoSans',
+});
+registerFont(path.join(process.cwd(), './public/fonts/Inter.ttf'), {
+  family: 'Inter',
+});
+registerFont(path.join(process.cwd(), './public/fonts/NotoSansArabic.ttf'), {
+  family: 'NotoSansArabic',
+});
+registerFont(
+  path.join(process.cwd(), './public/fonts/NotoSansDevanagari.ttf'),
+  {
+    family: 'NotoSansDevanagari',
+  }
+);
+registerFont(path.join(process.cwd(), './public/fonts/NotoSansJP.ttf'), {
+  family: 'NotoSansJP',
+});
+registerFont(path.join(process.cwd(), './public/fonts/NotoSansKR.ttf'), {
+  family: 'NotoSansKR',
+});
+registerFont(path.join(process.cwd(), './public/fonts/NotoSansSC.ttf'), {
+  family: 'NotoSansSC',
+});
+registerFont(path.join(process.cwd(), './public/fonts/NotoSansThai.ttf'), {
+  family: 'NotoSansThai',
+});
+registerFont(path.join(process.cwd(), './public/fonts/NotoSerifHebrew.ttf'), {
+  family: 'NotoSerifHebrew',
+});
+
+const FONT_FALLBACKS = [
+  { name: 'Inter', languages: /[\u0000-\u00FF]/ }, // Inglês e latim básico
+  { name: 'NotoSans', languages: /[\u0000-\u00FF]/ }, // Caracteres básicos latinos
+  { name: 'NotoSansJP', languages: /[\u3040-\u30FF\u31F0-\u31FF]/ }, // Japonês
+  { name: 'NotoSansKR', languages: /[\uAC00-\uD7AF]/ }, // Coreano
+  { name: 'NotoSansArabic', languages: /[\u0600-\u06FF]/ }, // Árabe
+  { name: 'NotoSansSC', languages: /[\u4E00-\u9FFF]/ }, // Chinês Simplificado
+  { name: 'NotoSansThai', languages: /[\u0E00-\u0E7F]/ }, // Tailandês
+  { name: 'NotoSansDevanagari', languages: /[\u0900-\u097F]/ }, // Hindi e Devanagari
+  { name: 'NotoSerifHebrew', languages: /[\u0590-\u05FF]/ }, // Hebraico
+];
+
+function getBestFontForChar(char: string): string {
+  for (const font of FONT_FALLBACKS) {
+    if (font.languages.test(char)) {
+      return font.name;
+    }
+  }
+  return 'NotoSans';
+}
+
+function drawTextWithFallback(
+  ctx: any,
+  text: string,
+  x: number,
+  y: number,
+  fontSize: number,
+  maxWidth: number
+) {
+  let offsetX = x;
+  const lineHeight = fontSize + 4;
+
+  for (const char of text) {
+    const fontToUse = getBestFontForChar(char);
+    ctx.font = `${fontSize}px ${fontToUse}`;
+
+    ctx.textBaseline = 'top';
+    ctx.shadowColor = 'black';
+    ctx.shadowOffsetX = 1;
+    ctx.shadowOffsetY = 1;
+    ctx.shadowBlur = 2;
+    ctx.lineWidth = 1;
+
+    if (offsetX + ctx.measureText(char).width > x + maxWidth) {
+      offsetX = x;
+      y += lineHeight;
+    }
+
+    ctx.strokeText(char, offsetX, y);
+    ctx.fillText(char, offsetX, y);
+
+    ctx.shadowColor = 'transparent';
+
+    offsetX += ctx.measureText(char).width;
+  }
+}
 
 export async function POST(request: Request) {
   try {
@@ -40,21 +129,9 @@ export async function POST(request: Request) {
         const img = await loadImage(album.imageUrl);
         ctx.drawImage(img, x, y, cellSize, cellSize);
       } catch (error) {
-        ctx.fillStyle = '#cccccc';
+        ctx.fillStyle = '#020617';
         ctx.fillRect(x, y, cellSize, cellSize);
       }
-
-      const fontSize = Math.floor(cellSize / 20);
-      const lineHeight = fontSize + 4;
-      ctx.font = `${fontSize}px "Noto Sans"`;
-      ctx.textBaseline = 'top';
-      ctx.shadowColor = 'black';
-      ctx.shadowOffsetX = 1;
-      ctx.shadowOffsetY = 1;
-      ctx.shadowBlur = 2;
-      ctx.fillStyle = 'white';
-      ctx.strokeStyle = 'black';
-      ctx.lineWidth = 1;
 
       let text = '';
       if (album.displayAlbumName !== false && album.name)
@@ -64,24 +141,25 @@ export async function POST(request: Request) {
       if (album.displayPlaycount !== false && album.playcount)
         text += `Plays: ${album.playcount}`;
 
+      const fontSize = Math.floor(cellSize / 20);
+      const lineHeight = fontSize + 4;
+      const maxTextWidth = cellSize - 10;
+
       const lines = text.split('\n').filter((line) => line.trim() !== '');
       for (let j = 0; j < lines.length; j++) {
-        ctx.strokeText(
+        drawTextWithFallback(
+          ctx,
           lines[j],
           col * cellSize + 5,
-          row * cellSize + 5 + j * lineHeight + 0.9
-        );
-        ctx.fillText(
-          lines[j],
-          col * cellSize + 5,
-          row * cellSize + 5 + j * lineHeight
+          row * cellSize + 5 + j * lineHeight,
+          fontSize,
+          maxTextWidth
         );
       }
-
-      ctx.shadowColor = 'transparent';
     }
 
     const isLargeGrid = dimension === 10;
+    console.log(ctx.font);
 
     const buffer = isLargeGrid
       ? canvas.toBuffer('image/jpeg', { quality: 1 })
