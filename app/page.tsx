@@ -30,7 +30,7 @@ export default function Home() {
     <div className="h-full min-h-screen flex flex-col items-center justify-between">
       <TheNavBar />
       <div>
-        <Logo className="~w-[20rem]/[36rem] h-auto dark:text-white/90 text-blue-600 fill-current pb-4" />
+        <Logo className="~w-[16rem]/[36rem] h-auto dark:text-white/90 text-blue-600 fill-current pb-4 px-2" />
       </div>
       <UserInput />
       <div className="flex flex-wrap justify-between items-center min-w-96 gap-6 px-4 mt-4">

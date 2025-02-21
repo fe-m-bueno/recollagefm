@@ -79,9 +79,9 @@ const UserInput = () => {
   ];
 
   return (
-    <form onSubmit={handleSubmit} className="p-6 ~w-[26rem]/[48rem]">
+    <form onSubmit={handleSubmit} className="p-6 ~w-[20rem]/[48rem]">
       <div className="flex flex-wrap gap-4 mb-4">
-        <div className="flex-1 min-w-[11rem] ~text-xs/base">
+        <div className="flex-1 min-w-[9rem] ~text-[0.7rem]/base">
           <label className="block mb-2 pl-3">{t('username')}</label>
           <input
             type="text"
