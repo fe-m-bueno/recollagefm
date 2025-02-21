@@ -2,8 +2,6 @@ import './globals.css';
 import { Metadata } from 'next';
 import { CollageProvider } from '../context/CollageContext';
 import I18nProvider from '@/components/i18nProvider';
-import { Analytics } from '@vercel/analytics/next';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://recollagefm.vercel.app'),
@@ -63,11 +61,7 @@ export default function RootLayout({
         <I18nProvider>
           <CollageProvider>
             <div className="flex flex-col min-h-screen">
-              <main className="flex-grow">
-                {children}
-                <Analytics />
-                <SpeedInsights />
-              </main>
+              <main className="flex-grow">{children}</main>
             </div>
           </CollageProvider>
         </I18nProvider>

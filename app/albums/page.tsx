@@ -11,6 +11,7 @@ import {
   useSensor,
   useSensors,
   TouchSensor,
+  MouseSensor,
 } from '@dnd-kit/core';
 import {
   arrayMove,
@@ -33,7 +34,8 @@ export default function AlbumsPage() {
     useSensor(PointerSensor, { activationConstraint: { distance: 10 } }),
     useSensor(TouchSensor, {
       activationConstraint: { delay: 150, tolerance: 5 },
-    })
+    }),
+    useSensor(MouseSensor)
   );
 
   const handleDragEnd = (event: any) => {

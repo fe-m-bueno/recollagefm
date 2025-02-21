@@ -13,9 +13,7 @@ registerFont(path.join(process.cwd(), './public/fonts/NotoSansArabic.ttf'), {
 });
 registerFont(
   path.join(process.cwd(), './public/fonts/NotoSansDevanagari.ttf'),
-  {
-    family: 'NotoSansDevanagari',
-  }
+  { family: 'NotoSansDevanagari' }
 );
 registerFont(path.join(process.cwd(), './public/fonts/NotoSansJP.ttf'), {
   family: 'NotoSansJP',
@@ -34,15 +32,15 @@ registerFont(path.join(process.cwd(), './public/fonts/NotoSerifHebrew.ttf'), {
 });
 
 const FONT_FALLBACKS = [
-  { name: 'Inter', languages: /[\u0000-\u00FF]/ }, // Inglês e latim básico
-  { name: 'NotoSans', languages: /[\u0000-\u00FF]/ }, // Caracteres básicos latinos
-  { name: 'NotoSansJP', languages: /[\u3040-\u30FF\u31F0-\u31FF]/ }, // Japonês
-  { name: 'NotoSansKR', languages: /[\uAC00-\uD7AF]/ }, // Coreano
-  { name: 'NotoSansArabic', languages: /[\u0600-\u06FF]/ }, // Árabe
-  { name: 'NotoSansSC', languages: /[\u4E00-\u9FFF]/ }, // Chinês Simplificado
-  { name: 'NotoSansThai', languages: /[\u0E00-\u0E7F]/ }, // Tailandês
-  { name: 'NotoSansDevanagari', languages: /[\u0900-\u097F]/ }, // Hindi e Devanagari
-  { name: 'NotoSerifHebrew', languages: /[\u0590-\u05FF]/ }, // Hebraico
+  { name: 'Inter', languages: /[\u0000-\u00FF]/ },
+  { name: 'NotoSans', languages: /[\u0000-\u00FF]/ },
+  { name: 'NotoSansJP', languages: /[\u3040-\u30FF\u31F0-\u31FF]/ },
+  { name: 'NotoSansKR', languages: /[\uAC00-\uD7AF]/ },
+  { name: 'NotoSansArabic', languages: /[\u0600-\u06FF]/ },
+  { name: 'NotoSansSC', languages: /[\u4E00-\u9FFF]/ },
+  { name: 'NotoSansThai', languages: /[\u0E00-\u0E7F]/ },
+  { name: 'NotoSansDevanagari', languages: /[\u0900-\u097F]/ },
+  { name: 'NotoSerifHebrew', languages: /[\u0590-\u05FF]/ },
 ];
 
 function getBestFontForChar(char: string): string {
@@ -60,7 +58,8 @@ function drawTextWithFallback(
   x: number,
   y: number,
   fontSize: number,
-  maxWidth: number
+  maxWidth: number,
+  isLargeGrid: boolean
 ) {
   let offsetX = x;
   const lineHeight = fontSize + 4;
@@ -70,11 +69,18 @@ function drawTextWithFallback(
     ctx.font = `${fontSize}px ${fontToUse}`;
 
     ctx.textBaseline = 'top';
-    ctx.shadowColor = 'black';
-    ctx.shadowOffsetX = 1;
-    ctx.shadowOffsetY = 1;
-    ctx.shadowBlur = 2;
-    ctx.lineWidth = 1;
+    ctx.fillStyle = 'white';
+    ctx.strokeStyle = 'black';
+
+    if (!isLargeGrid) {
+      ctx.shadowColor = 'black';
+      ctx.shadowOffsetX = 1;
+      ctx.shadowOffsetY = 1;
+      ctx.shadowBlur = 2;
+      ctx.lineWidth = 1;
+    } else {
+      ctx.shadowBlur = 0;
+    }
 
     if (offsetX + ctx.measureText(char).width > x + maxWidth) {
       offsetX = x;
@@ -85,7 +91,6 @@ function drawTextWithFallback(
     ctx.fillText(char, offsetX, y);
 
     ctx.shadowColor = 'transparent';
-
     offsetX += ctx.measureText(char).width;
   }
 }
@@ -96,10 +101,7 @@ export async function POST(request: Request) {
 
     let dimension = 3;
     let canvasSize = 900;
-    if (gridSize === '3x3') {
-      dimension = 3;
-      canvasSize = 900;
-    } else if (gridSize === '4x4') {
+    if (gridSize === '4x4') {
       dimension = 4;
       canvasSize = 1200;
     } else if (gridSize === '5x5') {
@@ -107,9 +109,10 @@ export async function POST(request: Request) {
       canvasSize = 1500;
     } else if (gridSize === '10x10') {
       dimension = 10;
-      canvasSize = 2100;
+      canvasSize = 1800;
     }
 
+    const isLargeGrid = dimension === 10;
     const cellSize = Math.floor(canvasSize / dimension);
     const canvas = createCanvas(canvasSize, canvasSize);
     const ctx = canvas.getContext('2d');
@@ -117,19 +120,31 @@ export async function POST(request: Request) {
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, canvasSize, canvasSize);
 
-    for (let i = 0; i < dimension * dimension; i++) {
-      const album = albums[i];
-      if (!album) continue;
+    // 📌 Carregamento de imagens mais rápido
+    const images = await Promise.allSettled(
+      albums.map(async (album: any) => {
+        try {
+          return { img: await loadImage(album.imageUrl), album };
+        } catch {
+          return { img: null, album };
+        }
+      })
+    );
+
+    // 📌 Renderiza os álbuns na grade
+    images.forEach((result, i) => {
+      if (result.status !== 'fulfilled' || !result.value) return;
+
+      const { img, album } = result.value;
       const row = Math.floor(i / dimension);
       const col = i % dimension;
       const x = col * cellSize;
       const y = row * cellSize;
 
-      try {
-        const img = await loadImage(album.imageUrl);
+      if (img) {
         ctx.drawImage(img, x, y, cellSize, cellSize);
-      } catch (error) {
-        ctx.fillStyle = '#ffffff';
+      } else {
+        ctx.fillStyle = '#cccccc';
         ctx.fillRect(x, y, cellSize, cellSize);
       }
 
@@ -141,31 +156,30 @@ export async function POST(request: Request) {
       if (album.displayPlaycount !== false && album.playcount)
         text += `Plays: ${album.playcount}`;
 
-      const fontSize = Math.floor(cellSize / 20);
-      const lineHeight = fontSize + 4;
+      const fontSize = isLargeGrid
+        ? Math.floor(cellSize / 22)
+        : Math.floor(cellSize / 20);
       const maxTextWidth = cellSize - 10;
-
       const lines = text.split('\n').filter((line) => line.trim() !== '');
-      for (let j = 0; j < lines.length; j++) {
+      lines.forEach((line, j) => {
         drawTextWithFallback(
           ctx,
-          lines[j],
-          col * cellSize + 5,
-          row * cellSize + 5 + j * lineHeight,
+          line,
+          x + 5,
+          y + 5 + j * fontSize * 1.2,
           fontSize,
-          maxTextWidth
+          maxTextWidth,
+          isLargeGrid
         );
-      }
-    }
+      });
+    });
 
-    const isLargeGrid = dimension === 10;
     console.log(ctx.font);
 
-    const buffer = isLargeGrid
-      ? canvas.toBuffer('image/jpeg', { quality: 0.8 })
-      : canvas.toBuffer('image/png');
+    const buffer = canvas.toBuffer('image/png');
+
     return new NextResponse(buffer, {
-      headers: { 'Content-Type': isLargeGrid ? 'image/jpeg' : 'image/png' },
+      headers: { 'Content-Type': 'image/png' },
     });
   } catch (error) {
     console.error(error);
