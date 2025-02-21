@@ -1,14 +1,6 @@
 import { NextResponse } from 'next/server';
-import { createCanvas, loadImage, registerFont } from 'canvas';
-import path from 'path';
+import { createCanvas, loadImage } from 'canvas';
 
-/* const fontPath = path.resolve('./public/fonts/Inter.ttf'); */
-registerFont(path.join(process.cwd(), 'public/fonts/Inter.ttf'), {
-  family: 'Inter',
-});
-/* const fontPath2 = path.resolve('./public/fonts/NotoSans.ttf');
-registerFont(fontPath2, { family: 'Noto Sans' });
- */
 export async function POST(request: Request) {
   try {
     const { gridSize, albums } = await request.json();
