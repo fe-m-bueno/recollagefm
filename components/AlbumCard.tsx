@@ -7,6 +7,7 @@ import AlbumOptions from './AlbumOptions';
 import Image from 'next/image';
 import { useTheme } from '@/hooks/useTheme';
 import { CollageContext } from '@/context/CollageContext';
+import { CircleEllipsis } from 'lucide-react';
 
 interface AlbumCardProps {
   album: any;
@@ -60,6 +61,7 @@ const AlbumCard: React.FC<AlbumCardProps> = ({ album, index }) => {
           }
         >
           <div className="dark:before:absolute dark:before:-inset-px dark:before:bg-gradient-to-b dark:before:from-black/100 dark:before:via-black/15 dark:before:rounded-xl before:mix-blend-overlay dark:before:mix-blend-normal" />
+
           <img
             src={album.imageUrl ? album.imageUrl : '/black-placeholder.png'}
             alt={album.name || 'Placeholder'}
@@ -87,11 +89,14 @@ const AlbumCard: React.FC<AlbumCardProps> = ({ album, index }) => {
                 Plays: {album.playcount}
               </p>
             )}
+            <div className="absolute top-12 right-2 flex justify-center ">
+              <CircleEllipsis size={20} color="#fff" />
+            </div>
           </div>
         </div>
       </div>
       <div
-        className="absolute bottom-0 left-0 right-0 flex justify-center cursor-move bg-gradient-to-t from-black/60 via-black/25 rounded-b-xl"
+        className="absolute bottom-0 left-0 right-0 pt-6 flex justify-center cursor-move bg-gradient-to-t from-black/60 via-black/25 rounded-b-xl"
         {...listeners}
       >
         <GripHorizontal size={30} color="#fff" />
