@@ -35,7 +35,7 @@ const CustomSelect = <T extends string | number>({
     <div className="relative w-full ~text-[0.7rem]/md text-nowrap">
       {labelKey && <label className="block mb-2 pl-3">{t(labelKey)}</label>}
       <Listbox value={value} onChange={onChange}>
-        <ListboxButton className="w-full flex justify-between items-center dark:bg-black/25 bg-white/80 backdrop-blur-sm border dark:border-white/10 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-white/50">
+        <ListboxButton className="w-full flex justify-between items-center dark:bg-black/25 bg-white/80 backdrop-blur-sm border dark:border-white/10 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600 dark:focus:ring-white/50 ~text-[0.5rem]/[1rem]">
           {options.find((o) => o.value === value)?.label}
           <ChevronDown className="pl-1 h-4 w-4 text-gray-400" />
         </ListboxButton>

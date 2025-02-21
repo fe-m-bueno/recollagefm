@@ -14,7 +14,7 @@ const ThemeToggle: React.FC = () => {
     >
       <div
         className={`absolute ~h-[0.375rem]/6 ~w-[0.375rem]/6 transform rounded-full bg-white shadow-md transition-transform duration-300 dark:bg-slate-950 items-center justify-center flex ${
-          theme === 'dark' ? '~translate-x-2/8' : 'translate-x-0'
+          theme === 'dark' ? '~translate-x-1/8' : 'translate-x-0'
         }`}
       >
         {theme === 'dark' ? (
