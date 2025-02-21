@@ -31,8 +31,6 @@ export async function POST(request: Request) {
     const cellSize = Math.floor(canvasSize / dimension);
     const canvas = createCanvas(canvasSize, canvasSize);
     const ctx = canvas.getContext('2d');
-    const supportedFont = 'Inter';
-    const fallbackFont = 'Noto Sans';
 
     ctx.fillStyle = '#ffffff';
     ctx.fillRect(0, 0, canvasSize, canvasSize);
@@ -55,6 +53,7 @@ export async function POST(request: Request) {
 
       const fontSize = Math.floor(cellSize / 20);
       const lineHeight = fontSize + 4;
+      ctx.font = `${fontSize}px "Noto Sans", sans-serif`;
       ctx.textBaseline = 'top';
       ctx.shadowColor = 'black';
       ctx.shadowOffsetX = 1;
@@ -74,22 +73,16 @@ export async function POST(request: Request) {
 
       const lines = text.split('\n').filter((line) => line.trim() !== '');
       for (let j = 0; j < lines.length; j++) {
-        let xPos = col * cellSize + 5;
-        let yPos = row * cellSize + 5 + j * lineHeight + 0.9;
-        let yPos1 = row * cellSize + 5 + j * lineHeight;
-
-        for (const char of lines[j]) {
-          const isNonLatin = /[^\u0000-\u00ff]/.test(char); // Detecta caracteres não latinos
-          const fontToUse = isNonLatin ? fallbackFont : supportedFont;
-
-          ctx.font = `${fontSize}px ${fontToUse}, Arial, sans-serif`;
-
-          ctx.strokeText(char, xPos, yPos);
-          ctx.fillText(char, xPos, yPos);
-          ctx.fillText(char, xPos, yPos1);
-
-          xPos += ctx.measureText(char).width;
-        }
+        ctx.strokeText(
+          lines[j],
+          col * cellSize + 5,
+          row * cellSize + 5 + j * lineHeight + 0.9
+        );
+        ctx.fillText(
+          lines[j],
+          col * cellSize + 5,
+          row * cellSize + 5 + j * lineHeight
+        );
       }
 
       ctx.shadowColor = 'transparent';
