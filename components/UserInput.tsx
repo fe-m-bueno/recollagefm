@@ -93,7 +93,7 @@ const UserInput = () => {
           />
         </div>
 
-        <div className="~w-28/36">
+        <div className="~w-26/36">
           <CustomSelect
             value={timespan}
             onChange={setTimespan}
@@ -102,7 +102,7 @@ const UserInput = () => {
           />
         </div>
 
-        <div className="~w-28/36">
+        <div className="~w-26/36">
           <CustomSelect
             value={gridSize}
             onChange={setGridSize}
