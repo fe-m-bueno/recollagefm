@@ -1,34 +1,49 @@
-import TheFooter from '@/components/TheFooter';
-import UserInput from '@/components/UserInput';
-import Features from '@/components/Features';
-import TheNavBar from '@/components/TheNavBar';
-import Logo from '@/public/recollage.svg';
+import TheFooter from "@/components/TheFooter";
+import UserInput from "@/components/UserInput";
+import Features from "@/components/Features";
+import TheNavBar from "@/components/TheNavBar";
+import Logo from "@/public/recollage.svg";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 
 export default function Home() {
   const features = [
     {
-      title: 'gatekeep',
-      sub: 'gatekeepSub',
-      content: 'gatekeepContent',
-      image: 'gatekeep',
+      title: "gatekeep",
+      sub: "gatekeepSub",
+      content: "gatekeepContent",
+      image: "gatekeep",
     },
     {
-      title: 'spare',
-      sub: 'spareSub',
-      content: 'spareContent',
-      image: 'spare',
+      title: "spare",
+      sub: "spareSub",
+      content: "spareContent",
+      image: "spare",
     },
     {
-      title: 'move',
-      sub: 'moveSub',
-      content: 'moveContent',
-      image: 'move',
+      title: "move",
+      sub: "moveSub",
+      content: "moveContent",
+      image: "move",
     },
   ];
 
   return (
-    <div className="h-full min-h-screen flex flex-col items-center justify-between">
-      <TheNavBar />
+    <div className="relative h-full min-h-screen flex flex-col items-center justify-between">
+      <div className="w-full flex flex-row justify-end">
+        <Link
+          href="https://recollageboxd.vercel.app"
+          className="w-fit absolute ~right-20/32 ~top-4/7 animate-pulse group inline-flex items-center gap-1"
+        >
+          <span className="group-hover:underline ~text-sm/base">
+            Check out the Letterboxd Recollage
+          </span>
+          <ArrowUpRight className="group-hover:translate-x-1 transition group-hover:-translate-y-1" />
+        </Link>
+        <div className="w-fit">
+          <TheNavBar />
+        </div>
+      </div>
       <div>
         <Logo className="~w-[16rem]/[36rem] h-auto dark:text-white/90 text-blue-600 fill-current pb-4 px-2" />
       </div>

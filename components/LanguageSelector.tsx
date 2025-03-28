@@ -5,11 +5,11 @@ import CustomSelect from './CustomSelect';
 
 const LanguageSelector: React.FC = () => {
   const { i18n } = useTranslation();
-  const [selectedLanguage, setSelectedLanguage] = useState<string>('en'); // Fallback padrão
+  const [selectedLanguage, setSelectedLanguage] = useState<string>('en');
 
   const languageOptions = [
     { value: 'en', label: 'English' },
-    { value: 'pt-br', label: 'Português do Brasil' },
+    { value: 'pt', label: 'Português do Brasil' },
     { value: 'es', label: 'Español' },
   ];
 
