@@ -1,7 +1,8 @@
-'use client';
-import React from 'react';
-import LanguageSelector from './LanguageSelector';
-import { useTranslation } from 'react-i18next';
+"use client";
+import React from "react";
+import LanguageSelector from "./LanguageSelector";
+import { useTranslation } from "react-i18next";
+import Link from "next/link";
 
 const TheFooter: React.FC = () => {
   const { t } = useTranslation();
@@ -11,7 +12,17 @@ const TheFooter: React.FC = () => {
         <div className="~w-36/48">
           <LanguageSelector />
         </div>
-        <p className="~w-50%/100% ~text-[0.8rem]/sm">&copy; 2025 - Felipe B.</p>
+        <p className="~w-50%/100% ~text-[0.8rem]/sm">
+          {" "}
+          &copy; 2025 -{" "}
+          <Link
+            href="https://felipe-bueno.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Felipe Bueno
+          </Link>
+        </p>
       </div>
     </footer>
   );
