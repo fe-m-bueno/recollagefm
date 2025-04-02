@@ -3,8 +3,7 @@ import UserInput from "@/components/UserInput";
 import Features from "@/components/Features";
 import TheNavBar from "@/components/TheNavBar";
 import Logo from "@/public/recollage.svg";
-import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import Callout from "@/components/Callout";
 
 export default function Home() {
   const features = [
@@ -31,15 +30,7 @@ export default function Home() {
   return (
     <div className="relative h-full min-h-screen flex flex-col items-center justify-between">
       <div className="w-full flex flex-row justify-end">
-        <Link
-          href="https://recollageboxd.vercel.app"
-          className="w-fit absolute ~right-20/32 ~top-4/7 animate-pulse group inline-flex items-center gap-1"
-        >
-          <span className="group-hover:underline ~text-sm/base">
-            Check out the Letterboxd Recollage
-          </span>
-          <ArrowUpRight className="group-hover:translate-x-1 transition group-hover:-translate-y-1" />
-        </Link>
+        <Callout />
         <div className="w-fit">
           <TheNavBar />
         </div>

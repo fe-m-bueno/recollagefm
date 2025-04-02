@@ -49,5 +49,6 @@
   "deleteAlbum": "Delete Album",
   "backupAlbums": "Backup Albums",
   "chooseBackup": "Choose a Backup",
-  "cancelReplacement": "Cancel Replacement"
+  "cancelReplacement": "Cancel Replacement",
+  "checkout": "Check out the Letterboxd Recollage"
 }
