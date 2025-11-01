@@ -37,6 +37,9 @@
     "moveSub": "No More Fixed Grids",
     "moveContent": "Manually reorder your collage – highlight your favorites however you want."
   },
+  "theme": "Theme",
+  "light": "Light",
+  "dark": "Dark",
   "language": "Language",
   "hideAlbum": "Hide Album",
   "showAlbum": "Show Album",
@@ -50,5 +53,6 @@
   "backupAlbums": "Backup Albums",
   "chooseBackup": "Choose a Backup",
   "cancelReplacement": "Cancel Replacement",
-  "checkout": "Check out the Letterboxd Recollage"
+  "checkout": "Check out the Letterboxd Recollage",
+  "options": "Options"
 }

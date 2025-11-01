@@ -37,6 +37,9 @@
     "moveSub": "Sin cuadrículas fijas",
     "moveContent": "Reordena manualmente tu mosaico – destaca tus favoritos como quieras."
   },
+  "theme": "Tema",
+  "light": "Claro",
+  "dark": "Oscuro",
   "language": "Idioma",
   "hideAlbum": "Ocultar álbum",
   "showAlbum": "Mostrar álbum",
@@ -50,5 +53,6 @@
   "backupAlbums": "Álbumes de respaldo",
   "chooseBackup": "Elegir un respaldo",
   "cancelReplacement": "Cancelar reemplazo",
-  "checkout": "Echa un vistazo al Recollage de Letterboxd"
+  "checkout": "Echa un vistazo al Recollage de Letterboxd",
+  "options": "Opciones"
 }
