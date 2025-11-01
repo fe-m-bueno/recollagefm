@@ -71,22 +71,16 @@ export default function AlbumsPage() {
   return (
     <div className="min-h-screen py-4 overflow-x-clip">
       <div className="w-screen flex justify-center">
-        <div className="w-full ~px-2/16 md:~px-1/16 flex flex-row items-center justify-center ~gap-2/6 md:~gap-1/6 py-4 relative">
-          <Link href={'/'} className="absolute left-0 hidden md:block">
+        <div className="w-full ~px-2/16 md:~px-1/16 flex flex-row items-center justify-between ~gap-[0.2rem]/1 py-4">
+          <Link href={'/'} className="hidden md:block">
             <Logo className="~w-5/20 h-auto dark:text-white/90 text-blue-600 fill-current" />
           </Link>
-          <div className="flex flex-row items-center ~gap-2/6 md:~gap-1/6">
-            <div className="flex items-center">
-              <UndoRedo />
-            </div>
-            <div className="flex items-center">
-              <ToggleDetails />
-            </div>
-            <div className="flex items-center">
-              <GenerateCollage />
-            </div>
+          <div className="flex flex-row items-center justify-between ~gap-1/6">
+            <UndoRedo />
+            <ToggleDetails />
+            <GenerateCollage />
           </div>
-          <div className="absolute right-0 ~pr-2/16 md:pr-0 flex items-center">
+          <div>
             <MobileMenu />
           </div>
         </div>
