@@ -71,7 +71,9 @@ const AlbumCardMobile: React.FC<AlbumCardMobileProps> = ({ album, index }) => {
             <div className="flex-1 min-w-0">
               <div className="flex items-center gap-2 mb-1">
                 {!album.displayAlbumName && (
-                  <EyeOff className="w-4 h-4 text-amber-500 dark:text-amber-400 flex-shrink-0" title="Nome do álbum oculto" />
+                  <span title="Nome do álbum oculto">
+                    <EyeOff className="w-4 h-4 text-amber-500 dark:text-amber-400 flex-shrink-0" />
+                  </span>
                 )}
                 <h3 className={`text-base font-bold text-gray-900 dark:text-white truncate ${
                   !album.displayAlbumName ? 'line-through opacity-60' : ''
@@ -81,7 +83,9 @@ const AlbumCardMobile: React.FC<AlbumCardMobileProps> = ({ album, index }) => {
               </div>
               <div className="flex items-center gap-2">
                 {!album.displayArtistName && (
-                  <EyeOff className="w-4 h-4 text-amber-500 dark:text-amber-400 flex-shrink-0" title="Nome do artista oculto" />
+                  <span title="Nome do artista oculto">
+                    <EyeOff className="w-4 h-4 text-amber-500 dark:text-amber-400 flex-shrink-0" />
+                  </span>
                 )}
                 <p className={`text-sm text-gray-600 dark:text-gray-300 truncate ${
                   !album.displayArtistName ? 'line-through opacity-60' : ''
@@ -91,7 +95,9 @@ const AlbumCardMobile: React.FC<AlbumCardMobileProps> = ({ album, index }) => {
               </div>
               <div className="flex items-center gap-2 mt-1">
                 {!album.displayPlaycount && (
-                  <EyeOff className="w-4 h-4 text-amber-500 dark:text-amber-400 flex-shrink-0" title="Playcount oculto" />
+                  <span title="Playcount oculto">
+                    <EyeOff className="w-4 h-4 text-amber-500 dark:text-amber-400 flex-shrink-0" />
+                  </span>
                 )}
                 {album.displayPlaycount && (
                   <p className="text-xs text-gray-500 dark:text-gray-400">
