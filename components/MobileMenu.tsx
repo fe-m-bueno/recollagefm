@@ -29,14 +29,12 @@ const MobileMenu: React.FC = () => {
     }
   }, [isMobile, isOpen]);
 
+  // Desktop: retorna apenas o switch antigo
   if (!isMobile) {
-    return (
-      <div className="flex items-center gap-3">
-        <LanguageSelector />
-        <ThemeToggle />
-      </div>
-    );
+    return <ThemeToggle />;
   }
+
+  // Mobile: usa theme e setTheme
 
   return (
     <div className="relative">
