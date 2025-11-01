@@ -20,7 +20,7 @@ const UndoRedo = () => {
   }, []);
 
   return (
-    <div className="flex gap-2 mb-4">
+    <div className="flex gap-2">
       <button
         onClick={undo}
         disabled={!canUndo}

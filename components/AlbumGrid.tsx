@@ -2,21 +2,12 @@
 import { useContext, useEffect, useState } from 'react';
 import { CollageContext } from '../context/CollageContext';
 import AlbumCard from './AlbumCard';
+import AlbumCardMobile from './AlbumCardMobile';
 import { useRouter } from 'next/navigation';
 
 import {
-  DndContext,
-  closestCenter,
-  PointerSensor,
-  useSensor,
-  useSensors,
-} from '@dnd-kit/core';
-import {
   arrayMove,
-  SortableContext,
-  rectSortingStrategy,
 } from '@dnd-kit/sortable';
-import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 
 const AlbumGrid = () => {
@@ -32,11 +23,23 @@ const AlbumGrid = () => {
   const { albums, settings, spareAlbums } = state;
   const { t } = useTranslation();
   const router = useRouter();
+  const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
     if (!state.albums.length) {
       router.push('/');
     }
   }, [state.albums, router]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const defaultColumns = parseInt(settings.gridSize.split('x')[0]);
   const [computedColumns, setComputedColumns] =
     useState<number>(defaultColumns);
@@ -69,20 +72,6 @@ const AlbumGrid = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, [settings.gridSize, defaultColumns]);
 
-  const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 10 } })
-  );
-
-  const handleDragEnd = (event: any) => {
-    const { active, over } = event;
-    if (active.id !== over.id) {
-      const oldIndex = albums.findIndex((a: any) => a.id === active.id);
-      const newIndex = albums.findIndex((a: any) => a.id === over.id);
-      const newAlbums = arrayMove(albums, oldIndex, newIndex);
-      updateAlbums(newAlbums);
-    }
-  };
-
   const handleCancelReplacement = () => {
     setReplacementTarget(null);
 
@@ -94,27 +83,25 @@ const AlbumGrid = () => {
 
   return (
     <div>
-      <DndContext
-        sensors={sensors}
-        collisionDetection={closestCenter}
-        onDragEnd={handleDragEnd}
-      >
-        <div style={{ touchAction: 'none' }}>
-          <SortableContext
-            items={albums.map((a: any) => a.id)}
-            strategy={rectSortingStrategy}
+      <div style={{ touchAction: 'none' }}>
+        {isMobile ? (
+          <div className="flex flex-col w-full px-4">
+            {albums.map((album: any, index: number) => (
+              <AlbumCardMobile key={album.id} album={album} index={index} />
+            ))}
+          </div>
+        ) : (
+          <div
+            className={`grid ~gap-2/4 w-full h-full`}
+            style={{ gridTemplateColumns: `repeat(${computedColumns}, 1fr)` }}
           >
-            <div
-              className={`grid ~gap-2/4 w-full h-full`}
-              style={{ gridTemplateColumns: `repeat(${computedColumns}, 1fr)` }}
-            >
-              {albums.map((album: any, index: number) => (
-                <AlbumCard key={album.id} album={album} index={index} />
-              ))}
-            </div>
-          </SortableContext>
-        </div>
-        <section id="spare" className="mt-4 flex flex-col items-center">
+            {albums.map((album: any, index: number) => (
+              <AlbumCard key={album.id} album={album} index={index} />
+            ))}
+          </div>
+        )}
+      </div>
+      <section id="spare" className="mt-4 flex flex-col items-center">
           {replacementTarget ? (
             <button
               onClick={handleCancelReplacement}
@@ -183,7 +170,6 @@ const AlbumGrid = () => {
             ))}
           </div>
         </section>
-      </DndContext>
     </div>
   );
 };

@@ -56,6 +56,27 @@ export default function RootLayout({
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1"
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const storedTheme = localStorage.getItem('theme') || 'light';
+                  const theme = storedTheme === 'dark' ? 'dark' : 'light';
+                  document.documentElement.setAttribute('data-mode', theme);
+                  if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                  }
+                } catch (e) {
+                  // Fallback para light se houver erro
+                  document.documentElement.setAttribute('data-mode', 'light');
+                }
+              })();
+            `,
+          }}
+        />
       </head>
       <body aria-live="polite">
         <I18nProvider>

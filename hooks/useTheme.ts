@@ -23,5 +23,11 @@ export function useTheme() {
     applyTheme(newTheme);
   };
 
-  return { theme, toggleTheme };
+  const setThemeDirect = (newTheme: Theme) => {
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+    applyTheme(newTheme);
+  };
+
+  return { theme, toggleTheme, setTheme: setThemeDirect };
 }

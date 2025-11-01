@@ -37,6 +37,9 @@
     "moveSub": "Chega de grades fixas",
     "moveContent": "Reordene seua semaninha manualmente – destaque seus favoritos como quiser."
   },
+  "theme": "Tema",
+  "light": "Claro",
+  "dark": "Escuro",
   "language": "Idioma",
   "hideAlbum": "Esconder Álbum",
   "showAlbum": "Mostrar Álbum",
@@ -50,5 +53,6 @@
   "backupAlbums": "Álbuns de Backup",
   "chooseBackup": "Escolha um Backup",
   "cancelReplacement": "Cancelar substituição",
-  "checkout": "Confira o Letterboxd Recollage"
+  "checkout": "Confira o Letterboxd Recollage",
+  "options": "Opções"
 }

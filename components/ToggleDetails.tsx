@@ -81,7 +81,7 @@ const ToggleDetails = () => {
   }, []);
 
   return (
-    <div className="flex flex-row ~gap-1/6 mb-4">
+    <div className="flex flex-row ~gap-1/6">
       <button
         onClick={toggleAlbumNames}
         className="~px-1/3 py-2 text-slate-700 dark:text-slate-100 dark:hover:text-slate-200 hover:text-slate-900 hover:bg-white/75 dark:bg-white/5 dark:hover:bg-white/10 rounded-xl transition hover:drop-shadow-sm ~w-8/48 text-nowrap"

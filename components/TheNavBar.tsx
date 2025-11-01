@@ -1,9 +1,9 @@
-import ThemeToggle from './ThemeToggle';
+import MobileMenu from './MobileMenu';
 
 const TheNavBar = () => {
   return (
     <div className="w-screen flex flex-row justify-end p-6">
-      <ThemeToggle />
+      <MobileMenu />
     </div>
   );
 };

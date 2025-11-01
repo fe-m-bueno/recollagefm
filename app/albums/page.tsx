@@ -17,11 +17,12 @@ import {
   arrayMove,
   SortableContext,
   rectSortingStrategy,
+  verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import ToggleDetails from '@/components/ToggleDetails';
 import { useTranslation } from 'react-i18next';
 import GenerateCollage from '@/components/GenerateCollage';
-import ThemeToggle from '@/components/ThemeToggle';
+import MobileMenu from '@/components/MobileMenu';
 import Link from 'next/link';
 import Logo from '@/public/recollage.svg';
 
@@ -29,6 +30,17 @@ export default function AlbumsPage() {
   const { state, updateAlbums } = useContext(CollageContext);
   const { albums, settings } = state;
   const { t } = useTranslation();
+
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 10 } }),
@@ -59,17 +71,23 @@ export default function AlbumsPage() {
   return (
     <div className="min-h-screen py-4 overflow-x-clip">
       <div className="w-screen flex justify-center">
-        <div className="w-full ~px-1/16 flex flex-row items-center justify-between ~gap-[0.2rem]/1">
-          <Link href={'/'} className="mb-4">
-            <Logo className="mt-4 ~w-5/20 h-auto dark:text-white/90 text-blue-600 fill-current pb-4" />
+        <div className="w-full ~px-2/16 md:~px-1/16 flex flex-row items-center justify-center ~gap-2/6 md:~gap-1/6 py-4 relative">
+          <Link href={'/'} className="absolute left-0 hidden md:block">
+            <Logo className="~w-5/20 h-auto dark:text-white/90 text-blue-600 fill-current" />
           </Link>
-          <div className="flex flex-row items-center justify-between ~gap-1/6">
-            <UndoRedo />
-            <ToggleDetails />
-            <GenerateCollage />
+          <div className="flex flex-row items-center ~gap-2/6 md:~gap-1/6">
+            <div className="flex items-center">
+              <UndoRedo />
+            </div>
+            <div className="flex items-center">
+              <ToggleDetails />
+            </div>
+            <div className="flex items-center">
+              <GenerateCollage />
+            </div>
           </div>
-          <div className="mb-4">
-            <ThemeToggle />
+          <div className="absolute right-0 ~pr-2/16 md:pr-0 flex items-center">
+            <MobileMenu />
           </div>
         </div>
       </div>
@@ -90,7 +108,9 @@ export default function AlbumsPage() {
         >
           <SortableContext
             items={albums.map((a: any) => a.id)}
-            strategy={rectSortingStrategy}
+            strategy={
+              isMobile ? verticalListSortingStrategy : rectSortingStrategy
+            }
           >
             <AlbumGrid />
           </SortableContext>
