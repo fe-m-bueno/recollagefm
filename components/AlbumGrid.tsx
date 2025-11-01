@@ -83,7 +83,7 @@ const AlbumGrid = () => {
 
   return (
     <div>
-      <div style={{ touchAction: 'none' }}>
+      <div style={isMobile ? { touchAction: 'pan-y' } : { touchAction: 'none' }}>
         {isMobile ? (
           <div className="flex flex-col w-full px-4">
             {albums.map((album: any, index: number) => (
