@@ -50,14 +50,15 @@ const AlbumCardMobile: React.FC<AlbumCardMobileProps> = ({ album, index }) => {
             <div
               {...listeners}
               {...attributes}
-              className="flex-shrink-0 cursor-grab active:cursor-grabbing touch-none"
+              className="flex-shrink-0 cursor-grab active:cursor-grabbing"
+              style={{ touchAction: 'none' }}
             >
-              <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 shadow-md ring-1 ring-black/10 dark:ring-white/10">
+              <div className="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0 shadow-md ring-1 ring-black/10 dark:ring-white/10">
                 <img
                   src={album.imageUrl ? album.imageUrl : '/black-placeholder.png'}
                   alt={album.name || 'Placeholder'}
-                  width={80}
-                  height={80}
+                  width={56}
+                  height={56}
                   onError={({ currentTarget }) => {
                     currentTarget.onerror = null;
                     currentTarget.src = '/error.png';
@@ -68,7 +69,7 @@ const AlbumCardMobile: React.FC<AlbumCardMobileProps> = ({ album, index }) => {
             </div>
 
             {/* Informações do álbum */}
-            <div className="flex-1 min-w-0">
+            <div className="flex-1 min-w-0" style={{ touchAction: 'pan-y' }}>
               <div className="flex items-center gap-2 mb-1">
                 {!album.displayAlbumName && (
                   <span title="Nome do álbum oculto">
@@ -117,6 +118,7 @@ const AlbumCardMobile: React.FC<AlbumCardMobileProps> = ({ album, index }) => {
               onClick={handleToggleOptions}
               className="flex-shrink-0 p-2 rounded-lg hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
               aria-label="Opções"
+              style={{ touchAction: 'manipulation' }}
             >
               <Settings className="w-5 h-5 text-gray-700 dark:text-gray-300" />
             </button>
@@ -125,7 +127,8 @@ const AlbumCardMobile: React.FC<AlbumCardMobileProps> = ({ album, index }) => {
             <div
               {...listeners}
               {...attributes}
-              className="flex-shrink-0 cursor-grab active:cursor-grabbing touch-none p-2 rounded-lg hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
+              className="flex-shrink-0 cursor-grab active:cursor-grabbing p-2 rounded-lg hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
+              style={{ touchAction: 'none' }}
             >
               <GripVertical className="w-5 h-5 text-gray-500 dark:text-gray-400" />
             </div>
