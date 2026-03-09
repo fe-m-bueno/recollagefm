@@ -1,13 +1,10 @@
 'use client';
-import React, { useState, useContext } from 'react';
+import React, { use, useState } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { GripHorizontal } from 'lucide-react';
+import { GripHorizontal, CircleEllipsis } from 'lucide-react';
 import AlbumOptions from './AlbumOptions';
-import Image from 'next/image';
-import { useTheme } from '@/hooks/useTheme';
 import { CollageContext } from '@/context/CollageContext';
-import { CircleEllipsis } from 'lucide-react';
 
 interface AlbumCardProps {
   album: any;
@@ -20,8 +17,7 @@ const AlbumCard: React.FC<AlbumCardProps> = ({ album, index }) => {
       id: album.id,
     });
   const [showOptions, setShowOptions] = useState(false);
-  const { theme, toggleTheme } = useTheme();
-  const { replacementTarget } = useContext(CollageContext);
+  const { replacementTarget } = use(CollageContext);
 
   const style = {
     transform: CSS.Transform.toString(transform),

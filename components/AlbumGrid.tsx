@@ -1,14 +1,11 @@
 'use client';
-import { useContext, useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import { CollageContext } from '../context/CollageContext';
 import AlbumCard from './AlbumCard';
 import AlbumCardMobile from './AlbumCardMobile';
 import { useRouter } from 'next/navigation';
-
-import {
-  arrayMove,
-} from '@dnd-kit/sortable';
 import { useTranslation } from 'react-i18next';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 const AlbumGrid = () => {
   const {
@@ -19,26 +16,17 @@ const AlbumGrid = () => {
     setReplacementTarget,
     previousScroll,
     setPreviousScroll,
-  } = useContext(CollageContext);
+  } = use(CollageContext);
   const { albums, settings, spareAlbums } = state;
   const { t } = useTranslation();
   const router = useRouter();
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     if (!state.albums.length) {
       router.push('/');
     }
   }, [state.albums, router]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   const defaultColumns = parseInt(settings.gridSize.split('x')[0]);
   const [computedColumns, setComputedColumns] =

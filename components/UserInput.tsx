@@ -1,10 +1,11 @@
 'use client';
-import { useState, useContext, useEffect } from 'react';
+import { use, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { CollageContext } from '../context/CollageContext';
 import { useTranslation } from 'react-i18next';
 import CustomSelect from './CustomSelect';
 import CustomCheckbox from './CustomCheckbox';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 const UserInput = () => {
   const [username, setUsername] = useState('');
@@ -17,7 +18,7 @@ const UserInput = () => {
   const { t } = useTranslation();
 
   const { updateSettings, setAlbums, setSpareAlbums } =
-    useContext(CollageContext);
+    use(CollageContext);
 
   const router = useRouter();
 
@@ -61,19 +62,7 @@ const UserInput = () => {
     }
     setLoading(false);
   };
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 830);
-    };
-
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const isMobile = useIsMobile(830);
 
   const gridSizeOptions = [
     { value: '3x3', label: t('gridSize.3x3') },

@@ -37,7 +37,7 @@ const SpareAlbumCard: React.FC<SpareAlbumCardProps> = ({ album }) => {
         alt={album.name || 'Placeholder'}
         width={300}
         height={300}
-        onLoadingComplete={handleImageLoad}
+        onLoad={handleImageLoad}
         onError={handleImageError}
         className={`w-full h-full object-cover rounded-lg ${
           imageLoaded ? 'block' : 'hidden'

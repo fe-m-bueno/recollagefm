@@ -1,13 +1,24 @@
 import './globals.css';
-import { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { CollageProvider } from '../context/CollageContext';
 import I18nProvider from '@/components/i18nProvider';
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: '#020617',
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://recollagefm.vercel.app'),
-  title: 'Recollage - Create Custom Last.fm Album Grids',
+  title: 'Recollage.fm',
   icons: {
-    icon: '/favicon.svg',
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.png', type: 'image/png' },
+    ],
+    apple: '/favicon.png',
   },
   description:
     'Generate personalized album collages from your Last.fm top albums with customizable layouts.',
@@ -45,17 +56,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
-        <title>Recollage.fm</title>
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="icon" type="image/png" href="/favicon.png" />
-        <link rel="apple-touch-icon" href="/favicon.png" />
-        <meta name="theme-color" content="#020617" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1"
-        />
         <script
           dangerouslySetInnerHTML={{
             __html: `

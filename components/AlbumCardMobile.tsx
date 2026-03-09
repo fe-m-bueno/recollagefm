@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useContext } from 'react';
+import React, { use, useState } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { Settings, GripVertical, EyeOff } from 'lucide-react';
@@ -17,7 +17,7 @@ const AlbumCardMobile: React.FC<AlbumCardMobileProps> = ({ album, index }) => {
       id: album.id,
     });
   const [showOptions, setShowOptions] = useState(false);
-  const { replacementTarget } = useContext(CollageContext);
+  const { replacementTarget } = use(CollageContext);
 
   const style = {
     transform: CSS.Transform.toString(transform),

@@ -1,23 +1,12 @@
 'use client';
-import { useContext, useEffect, useState } from 'react';
+import { use } from 'react';
 import { CollageContext } from '../context/CollageContext';
-import { Undo2, Redo2 } from 'lucide-react';
+import { Undo2 } from 'lucide-react';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 const UndoRedo = () => {
-  const { undo, canUndo } = useContext(CollageContext);
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 830);
-    };
-
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const { undo, canUndo } = use(CollageContext);
+  const isMobile = useIsMobile(830);
 
   return (
     <div className="flex gap-2">

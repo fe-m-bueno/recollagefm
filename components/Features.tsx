@@ -1,5 +1,4 @@
 'use client';
-import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
 import {
   EyeOff,
@@ -12,7 +11,8 @@ import {
   Move,
   Settings2,
 } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useIsMobile } from '@/hooks/useIsMobile';
+
 const Features = ({
   title,
   sub,
@@ -25,19 +25,7 @@ const Features = ({
   image: string;
 }) => {
   const { t } = useTranslation();
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 1300);
-    };
-
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const isMobile = useIsMobile(1300);
 
   return (
     <div

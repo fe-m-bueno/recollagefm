@@ -1,5 +1,5 @@
 'use client';
-import React, { useContext, useState, useEffect } from 'react';
+import React, { use } from 'react';
 import { CollageContext } from '../../context/CollageContext';
 import AlbumGrid from '../../components/AlbumGrid';
 import UndoRedo from '../../components/UndoRedo';
@@ -25,22 +25,14 @@ import GenerateCollage from '@/components/GenerateCollage';
 import MobileMenu from '@/components/MobileMenu';
 import Link from 'next/link';
 import Logo from '@/public/recollage.svg';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 export default function AlbumsPage() {
-  const { state, updateAlbums } = useContext(CollageContext);
+  const { state, updateAlbums } = use(CollageContext);
   const { albums, settings } = state;
   const { t } = useTranslation();
 
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const isMobile = useIsMobile();
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 10 } }),

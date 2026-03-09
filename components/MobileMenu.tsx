@@ -5,23 +5,13 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from '../hooks/useTheme';
 import ThemeToggle from './ThemeToggle';
 import LanguageSelector from './LanguageSelector';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 const MobileMenu: React.FC = () => {
   const { t } = useTranslation();
   const { theme, setTheme } = useTheme();
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useIsMobile();
   const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
 
   useEffect(() => {
     if (!isMobile && isOpen) {

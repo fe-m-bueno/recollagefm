@@ -1,5 +1,5 @@
 'use client';
-import React, { useContext } from 'react';
+import React, { use } from 'react';
 import { CollageContext } from '../context/CollageContext';
 import CustomCheckbox from './CustomCheckbox';
 import { X, Trash, Replace } from 'lucide-react';
@@ -15,7 +15,7 @@ const AlbumOptionsMobile: React.FC<AlbumOptionsMobileProps> = ({
   closeOptions,
 }) => {
   const { toggleAlbumOption, deleteAlbum, setReplacementTarget, setPreviousScroll } =
-    useContext(CollageContext);
+    use(CollageContext);
   const { t } = useTranslation();
 
   const handlePickSpare = () => {

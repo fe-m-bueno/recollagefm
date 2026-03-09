@@ -1,5 +1,5 @@
 'use client';
-import { useContext, useState, useEffect } from 'react';
+import { use } from 'react';
 import { CollageContext } from '../context/CollageContext';
 import {
   Eye,
@@ -9,9 +9,10 @@ import {
   BookHeadphones,
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 const ToggleDetails = () => {
-  const { state, updateAlbums, setSpareAlbums } = useContext(CollageContext);
+  const { state, updateAlbums, setSpareAlbums } = use(CollageContext);
   const { t } = useTranslation();
 
   const albumNamesShown =
@@ -66,19 +67,7 @@ const ToggleDetails = () => {
     setSpareAlbums(newSpareAlbums);
   };
 
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 830);
-    };
-
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const isMobile = useIsMobile(830);
 
   return (
     <div className="flex flex-row ~gap-1/6">

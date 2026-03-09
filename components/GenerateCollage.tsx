@@ -1,12 +1,13 @@
 'use client';
-import React, { useState, useContext, useEffect } from 'react';
+import React, { use, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { CollageContext } from '../context/CollageContext';
 import { Loader, Play } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 const GenerateCollage: React.FC = () => {
-  const { state } = useContext(CollageContext);
+  const { state } = use(CollageContext);
   const { settings, albums } = state;
   const { t } = useTranslation();
   const router = useRouter();
@@ -54,19 +55,7 @@ const GenerateCollage: React.FC = () => {
     }
   };
 
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 830);
-    };
-
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const isMobile = useIsMobile(830);
 
   return (
     <div>

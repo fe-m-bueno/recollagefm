@@ -1,9 +1,10 @@
 'use client';
-import React, { useContext, useState, useEffect } from 'react';
+import React, { use } from 'react';
 import { CollageContext } from '../context/CollageContext';
 import CustomCheckbox from './CustomCheckbox';
 import { X, Trash, Replace } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useIsMobile } from '@/hooks/useIsMobile';
 
 interface AlbumOptionsProps {
   album: any;
@@ -11,10 +12,9 @@ interface AlbumOptionsProps {
 }
 
 const AlbumOptions: React.FC<AlbumOptionsProps> = ({ album, closeOptions }) => {
-  const { toggleAlbumOption, deleteAlbum, setReplacementTarget } =
-    useContext(CollageContext);
+  const { toggleAlbumOption, deleteAlbum, setReplacementTarget, setPreviousScroll } =
+    use(CollageContext);
   const { t } = useTranslation();
-  const { setPreviousScroll } = useContext(CollageContext);
 
   const handlePickSpare = () => {
     setReplacementTarget(album.id);
@@ -27,19 +27,7 @@ const AlbumOptions: React.FC<AlbumOptionsProps> = ({ album, closeOptions }) => {
     closeOptions();
   };
 
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 1150);
-    };
-
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  const isMobile = useIsMobile(1150);
 
   return (
     <div className="absolute inset-0 bg-black rounded-xl bg-opacity-50 flex flex-col justify-center items-center z-20">
