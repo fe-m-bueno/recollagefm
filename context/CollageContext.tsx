@@ -32,6 +32,7 @@ interface CollageContextProps {
   swapAlbumWithSpare: (spareAlbumId: string) => void;
   previousScroll: number | null;
   setPreviousScroll: (value: number | null) => void;
+  isHydrated: boolean;
 }
 
 export const CollageContext = createContext<CollageContextProps>(
@@ -41,7 +42,7 @@ export const CollageContext = createContext<CollageContextProps>(
 export const CollageProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [state, setState] = useState<CollageState>({
+  const defaultState: CollageState = {
     settings: {
       username: '',
       timespan: '7day',
@@ -52,22 +53,25 @@ export const CollageProvider: React.FC<{ children: React.ReactNode }> = ({
     },
     albums: [],
     spareAlbums: [],
-  });
+  };
+
+  const [state, setState] = useState<CollageState>(defaultState);
+  const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedState = sessionStorage.getItem('collageState');
-      if (storedState) {
-        setState(JSON.parse(storedState));
-      }
+    const stored = localStorage.getItem('collageState');
+    if (stored) {
+      try {
+        setState(JSON.parse(stored));
+      } catch {}
     }
+    setIsHydrated(true);
   }, []);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      sessionStorage.setItem('collageState', JSON.stringify(state));
-    }
-  }, [state]);
+    if (!isHydrated) return;
+    localStorage.setItem('collageState', JSON.stringify(state));
+  }, [state, isHydrated]);
 
   const [previousScroll, setPreviousScroll] = useState<number | null>(null);
   const [history, setHistory] = useState<[DisplayAlbum[], DisplayAlbum[]][]>([]);
@@ -214,6 +218,7 @@ export const CollageProvider: React.FC<{ children: React.ReactNode }> = ({
         swapAlbumWithSpare,
         previousScroll,
         setPreviousScroll,
+        isHydrated,
       }}
     >
       {children}

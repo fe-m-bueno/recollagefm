@@ -16,6 +16,7 @@ const AlbumGrid = () => {
     setReplacementTarget,
     previousScroll,
     setPreviousScroll,
+    isHydrated,
   } = use(CollageContext);
   const { albums, settings, spareAlbums } = state;
   const { t } = useTranslation();
@@ -23,10 +24,10 @@ const AlbumGrid = () => {
   const isMobile = useIsMobile();
 
   useEffect(() => {
-    if (!state.albums.length) {
+    if (isHydrated && !state.albums.length) {
       router.push('/');
     }
-  }, [state.albums, router]);
+  }, [state.albums, router, isHydrated]);
 
   const defaultColumns = parseInt(settings.gridSize.split('x')[0]);
   const [computedColumns, setComputedColumns] =
