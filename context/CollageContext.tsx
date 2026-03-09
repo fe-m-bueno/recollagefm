@@ -1,5 +1,6 @@
 'use client';
 import { createContext, useState, useEffect } from 'react';
+import type { DisplayAlbum } from '@/utils/lastfm';
 
 interface Settings {
   username: string;
@@ -12,17 +13,17 @@ interface Settings {
 
 interface CollageState {
   settings: Settings;
-  albums: any[];
-  spareAlbums: any[];
+  albums: DisplayAlbum[];
+  spareAlbums: DisplayAlbum[];
 }
 
 interface CollageContextProps {
   state: CollageState;
   updateSettings: (settings: Settings) => void;
-  setAlbums: (albums: any[]) => void;
-  setSpareAlbums: (albums: any[]) => void;
-  updateAlbums: (albums: any[]) => void;
-  toggleAlbumOption: (albumId: string, option: string) => void;
+  setAlbums: (albums: DisplayAlbum[]) => void;
+  setSpareAlbums: (albums: DisplayAlbum[]) => void;
+  updateAlbums: (albums: DisplayAlbum[]) => void;
+  toggleAlbumOption: (albumId: string, option: keyof Pick<DisplayAlbum, 'displayAlbumName' | 'displayArtistName' | 'displayPlaycount'>) => void;
   deleteAlbum: (albumId: string) => void;
   undo: () => void;
   canUndo: boolean;
@@ -69,11 +70,11 @@ export const CollageProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [state]);
 
   const [previousScroll, setPreviousScroll] = useState<number | null>(null);
-  const [history, setHistory] = useState<[any[], any[]][]>([]);
-  const [future, setFuture] = useState<[any[], any[]][]>([]);
+  const [history, setHistory] = useState<[DisplayAlbum[], DisplayAlbum[]][]>([]);
+  const [future, setFuture] = useState<[DisplayAlbum[], DisplayAlbum[]][]>([]);
 
-  const pushSnapshot = (albums: any[], spareAlbums: any[]) => {
-    const snapshot: [any[], any[]] = [
+  const pushSnapshot = (albums: DisplayAlbum[], spareAlbums: DisplayAlbum[]) => {
+    const snapshot: [DisplayAlbum[], DisplayAlbum[]] = [
       JSON.parse(JSON.stringify(albums)),
       JSON.parse(JSON.stringify(spareAlbums)),
     ];
@@ -92,17 +93,17 @@ export const CollageProvider: React.FC<{ children: React.ReactNode }> = ({
     setState((prev) => ({ ...prev, settings }));
   };
 
-  const setAlbums = (albums: any[]) => {
+  const setAlbums = (albums: DisplayAlbum[]) => {
     setHistory([]);
     setFuture([]);
     setState((prev) => ({ ...prev, albums }));
   };
 
-  const setSpareAlbums = (albums: any[]) => {
+  const setSpareAlbums = (albums: DisplayAlbum[]) => {
     setState((prev) => ({ ...prev, spareAlbums: albums }));
   };
 
-  const updateState = (newAlbums: any[], newSpares: any[]) => {
+  const updateState = (newAlbums: DisplayAlbum[], newSpares: DisplayAlbum[]) => {
     setState((prevState) => {
       pushSnapshot(prevState.albums, prevState.spareAlbums);
       setFuture([]);
@@ -110,7 +111,7 @@ export const CollageProvider: React.FC<{ children: React.ReactNode }> = ({
     });
   };
 
-  const updateAlbums = (albums: any[]) => {
+  const updateAlbums = (albums: DisplayAlbum[]) => {
     setState((prevState) => {
       pushSnapshot(prevState.albums, prevState.spareAlbums);
       setFuture([]);

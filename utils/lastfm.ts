@@ -7,6 +7,12 @@ export interface Album {
   url: string;
 }
 
+export interface DisplayAlbum extends Album {
+  displayAlbumName: boolean;
+  displayArtistName: boolean;
+  displayPlaycount: boolean;
+}
+
 export async function fetchUserTopAlbums(
   user: string,
   period: string,

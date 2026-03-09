@@ -1,17 +1,18 @@
 'use client';
-import React, { use, useState } from 'react';
+import React, { memo, use, useState } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { GripHorizontal, CircleEllipsis } from 'lucide-react';
 import AlbumOptions from './AlbumOptions';
 import { CollageContext } from '@/context/CollageContext';
+import { AnimatePresence } from 'framer-motion';
+import type { DisplayAlbum } from '@/utils/lastfm';
 
 interface AlbumCardProps {
-  album: any;
-  index: number;
+  album: DisplayAlbum;
 }
 
-const AlbumCard: React.FC<AlbumCardProps> = ({ album, index }) => {
+const AlbumCard: React.FC<AlbumCardProps> = ({ album }) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({
       id: album.id,
@@ -98,14 +99,16 @@ const AlbumCard: React.FC<AlbumCardProps> = ({ album, index }) => {
         <GripHorizontal size={30} color="#fff" />
       </div>
 
-      {showOptions && (
-        <AlbumOptions
-          album={album}
-          closeOptions={() => setShowOptions(false)}
-        />
-      )}
+      <AnimatePresence>
+        {showOptions && (
+          <AlbumOptions
+            album={album}
+            closeOptions={() => setShowOptions(false)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 };
 
-export default AlbumCard;
+export default memo(AlbumCard);

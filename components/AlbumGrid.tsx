@@ -74,8 +74,8 @@ const AlbumGrid = () => {
       <div style={isMobile ? { touchAction: 'pan-y' } : { touchAction: 'none' }}>
         {isMobile ? (
           <div className="flex flex-col w-full px-4">
-            {albums.map((album: any, index: number) => (
-              <AlbumCardMobile key={album.id} album={album} index={index} />
+            {albums.map((album: any) => (
+              <AlbumCardMobile key={album.id} album={album} />
             ))}
           </div>
         ) : (
@@ -83,8 +83,8 @@ const AlbumGrid = () => {
             className={`grid ~gap-2/4 w-full h-full`}
             style={{ gridTemplateColumns: `repeat(${computedColumns}, 1fr)` }}
           >
-            {albums.map((album: any, index: number) => (
-              <AlbumCard key={album.id} album={album} index={index} />
+            {albums.map((album: any) => (
+              <AlbumCard key={album.id} album={album} />
             ))}
           </div>
         )}
